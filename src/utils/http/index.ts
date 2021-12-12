@@ -1,5 +1,17 @@
-import axios from './axios';
+import axios, { axiosGet, axiosPost, axiosPut, axiosDelete } from './axios';
+import { success, warning, error, info, loading } from './message';
 
 export {
-  axios
+  axios,
+
+  axiosGet,
+  axiosPost,
+  axiosPut,
+  axiosDelete,
+
+  success,
+  warning,
+  error,
+  info,
+  loading
 }

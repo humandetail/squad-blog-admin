@@ -19,6 +19,8 @@
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
       "@views/*": ["./src/views/*"],
+      "@config/*": ["./src/config/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
