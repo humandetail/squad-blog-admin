@@ -1,0 +1,26 @@
+.ant-message {
+  .ant-message-notice-content {
+    padding: 0 !important;
+
+    .ant-message-custom-content {
+      padding: 6px 16px !important;
+      border-radius: 2px;
+
+      .anticon {
+        color: @primary-text;
+      }
+
+      &.ant-message-error {
+        background-color: fade(@error-color, 85);
+      }
+
+      &.ant-message-success {
+        background-color: fade(@success-color, 85);
+      }
+
+      &.ant-message-warning {
+        background-color: fade(@warning-color, 85);
+      }
+    }
+  }
+}

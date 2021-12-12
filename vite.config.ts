@@ -47,7 +47,9 @@ export default defineConfig({
           'primary-color': '#177ddc',
           'success-color': '#49aa19',
           'error-color': '#d32029',
-          'body-background': '#141414'
+          'warning-color': '#faad14',
+          'body-background': '#141414',
+          'primary-text': 'rgba(255,255,255,.85)'
         }
       }
     }

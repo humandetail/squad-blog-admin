@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ['plugin:vue/essential', 'standard'],
+  extends: ['plugin:vue/vue3-essential', 'standard'],
   parserOptions: {
     ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
