@@ -5,12 +5,19 @@ import {
 } from 'vue-router';
 
 import Home from '@/views/Home.vue';
+import Login from '@/views/Login.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
     component: Home
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ];
 

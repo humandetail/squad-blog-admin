@@ -2,7 +2,7 @@ import { IMenuItem, IUserInfo } from '@/types/user';
 import { encryptPassword } from '@/utils/tools';
 import { axiosGet, axiosPost } from '@utils/http';
 
-interface ILoginParams {
+export interface ILoginParams {
   username: string;
   password: string;
 }

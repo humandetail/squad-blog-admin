@@ -24,7 +24,7 @@ export const warning = (content: string, duration = 3, key: string | number = ''
   });
 }
 
-export const error = (content: string, duration = 3, key: string | number = '') => {
+export const error = (content: string = '未知错误', duration = 3, key: string | number = '') => {
   return message.open({
     type: 'error',
     content,
