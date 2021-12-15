@@ -22,7 +22,11 @@ router.beforeEach((to, from, next) => {
       next({ path: 'login', query: { redirect: to.fullPath } })
     } else {
       // TODO: 需要确定用户可访问菜单
-      next();
+      userStore.setUserInfo()
+        .then(() => {
+          //
+          next();
+        });
     }
   }
 });

@@ -4,7 +4,7 @@
       <header class="login-form-header">
         <h1>博客后台管理中心</h1>
       </header>
-      <a-form @submit.prevent="onSubmit">
+      <a-form @submit.prevent="submit">
         <a-form-item v-bind="validateInfos.username">
           <a-input
             v-model:value="modelRef.username"
@@ -46,12 +46,13 @@
 import { ref } from 'vue';
 import { useForm } from '@/hooks/common';
 import LoginBg from '@assets/imgs/login-bg.jpg'
-import { ILoginParams, login } from '@/services';
+import { login } from '@/services';
 import { error } from '@/utils/http';
 import { useUserStore } from '@/store/user';
 import { useRoute, useRouter } from 'vue-router';
 import { getQueryString } from '@/utils/tools';
 import { passwordReg, usernameReg } from '@/utils/regexp';
+import { ILoginParams } from '@/types/user';
 
 const loginBgStyle = `url(${LoginBg})`; // 背景图片
 
@@ -80,7 +81,7 @@ const validateSuccess = async (data: ILoginParams) => {
   }
 }
 
-const { modelRef, onSubmit, validateInfos } = useForm<ILoginParams>({
+const { modelRef, submit, validateInfos } = useForm<ILoginParams>({
   username: '',
   password: ''
 }, {

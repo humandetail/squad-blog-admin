@@ -1,13 +1,15 @@
 import { reactive, toRaw } from 'vue';
 import { Form } from 'ant-design-vue';
-import { Props, ValidateInfo } from 'ant-design-vue/lib/form/useForm';
+import { Props, ValidateInfo, validateOptions } from 'ant-design-vue/lib/form/useForm';
 import { isFunction } from 'lodash';
 import { UnwrapNestedRefs } from '@vue/reactivity';
+import { RuleError } from 'ant-design-vue/lib/form/interface';
 
 interface IReturn<T> {
   modelRef: UnwrapNestedRefs<T>;
   resetFields: (newValues?: Props | undefined) => void;
-  onSubmit: () => void;
+  submit: () => void;
+  validateField: (name: string, value: any, rules: Record<string, unknown>[], option?: validateOptions | undefined) => Promise<RuleError[]>
   validateInfos: {
     [key: string]: ValidateInfo
   };
@@ -37,9 +39,9 @@ function useForm<T extends Props> (data: T, rules?: Props, handleSuccess?: (valu
     error = handleError;
   }
 
-  const { resetFields, validate, validateInfos } = Form.useForm(modelRef, _rules);
+  const { resetFields, validate, validateField, validateInfos } = Form.useForm(modelRef, _rules);
 
-  const onSubmit = () => {
+  const submit = () => {
     validate().then(() => {
       success && success(toRaw(modelRef));
     }).catch((err) => {
@@ -50,7 +52,8 @@ function useForm<T extends Props> (data: T, rules?: Props, handleSuccess?: (valu
   return {
     modelRef,
     resetFields,
-    onSubmit,
+    submit,
+    validateField,
     validateInfos
   }
 };

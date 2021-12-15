@@ -1,11 +1,6 @@
-import { IMenuItem, IUserInfo } from '@/types/user';
+import { ILoginParams, IChangePasswordParams, IMenuItem, IUserInfo } from '@/types/user';
 import { encryptPassword } from '@/utils/tools';
-import { axiosGet, axiosPost } from '@utils/http';
-
-export interface ILoginParams {
-  username: string;
-  password: string;
-}
+import { axiosGet, axiosPost, axiosPut } from '@/utils/http';
 
 /**
  * 用户登录
@@ -24,7 +19,7 @@ export function login ({ username, password }: ILoginParams) {
  * @returns null
  */
 export function logout () {
-  return axiosPost('/logout');
+  return axiosGet('/logout');
 }
 
 /**
@@ -41,4 +36,11 @@ export function getUserInfo () {
  */
 export function getMenus () {
   return axiosGet<IMenuItem[]>('/getMenus');
+}
+
+/**
+ * 修改用户密码
+ */
+export function changePassword (id: string, data: IChangePasswordParams) {
+  return axiosPut(`/users/${id}/password`, data);
 }

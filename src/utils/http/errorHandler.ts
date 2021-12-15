@@ -1,4 +1,3 @@
-import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/user';
 import { error } from './message';
 
@@ -11,9 +10,7 @@ export default (err: any) => {
         break
       case 401:
         error('登录过期，请重新登录');
-        useUserStore().logout().then(() => {
-          useRouter().push('/login');
-        })
+        useUserStore().logout();
         break
       case 403:
         error('服务拒绝访问');

@@ -1,6 +1,8 @@
 import { TOKEN } from '@/config/constants';
-import { logout } from '@/services';
+import router from '@/router';
+import { getUserInfo, logout } from '@/services';
 import { IMenuItem, IUserInfo } from '@/types/user';
+import { error } from '@/utils/http';
 import { defineStore } from 'pinia';
 
 interface IUserState {
@@ -9,9 +11,11 @@ interface IUserState {
   menus: IMenuItem[]
 }
 
+const token = localStorage.getItem(TOKEN) || '';
+
 export const useUserStore = defineStore('user', {
   state: () => (<IUserState>{
-    token: '',
+    token,
     userInfo: null,
     menus: []
   }),
@@ -22,8 +26,17 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem(TOKEN, token);
     },
 
-    setUserInfo (userInfo: IUserInfo) {
-      this.userInfo = userInfo;
+    async setUserInfo () {
+      try {
+        const res = await getUserInfo();
+        if (res.code !== 200) {
+          throw res;
+        }
+
+        this.userInfo = res.data;
+      } catch (err: any) {
+        error(err.message);
+      }
     },
 
     setMenus (menus: IMenuItem[]) {
@@ -32,9 +45,12 @@ export const useUserStore = defineStore('user', {
 
     async logout () {
       try {
-        await logout();
+        if (this.token) {
+          await logout();
+        }
       } finally {
         this.setToken('');
+        router.push('/login');
       }
     }
   }

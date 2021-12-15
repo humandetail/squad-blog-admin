@@ -6,7 +6,7 @@ import _ from 'lodash';
 export const encryptPassword = (plain: string) => {
   const enc = new JSEncrypt();
   enc.setPublicKey(publicKey);
-  return enc.encrypt(plain);
+  return enc.encrypt(plain) || plain;
 }
 
 export const getQueryString = (query: LocationQuery, key: string): string => {
