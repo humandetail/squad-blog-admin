@@ -10,7 +10,12 @@ export default defineConfig({
       refTransform: true
     }),
     ViteComponents({
-      customComponentResolvers: [AntDesignVueResolver()]
+      customComponentResolvers: [
+        AntDesignVueResolver({
+          resolveIcons: true,
+          importStyle: false
+        })
+      ]
     })
   ],
 
@@ -51,7 +56,10 @@ export default defineConfig({
           'error-color': '#d32029',
           'warning-color': '#faad14',
           'body-background': '#141414',
-          'primary-text': 'rgba(255,255,255,.85)'
+          'primary-text': 'rgba(255,255,255,.85)',
+          'secondary-text': 'rgba(255,255,255,.65)',
+
+          'card-background': '#1f1f1f'
         }
       }
     }
