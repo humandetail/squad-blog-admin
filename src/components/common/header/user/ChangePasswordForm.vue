@@ -41,6 +41,7 @@
 import { useForm, useRequest } from '@/hooks/common';
 import { changePassword } from '@/services';
 import { useUserStore } from '@/store/user';
+import { IBaseResponse } from '@/types/common';
 import { IChangePasswordParams } from '@/types/user';
 import { success } from '@/utils/http';
 import { passwordReg } from '@/utils/regexp';
@@ -112,7 +113,7 @@ const rules = {
   newPassword2: [{ required: true, validator: validatePassword2 }]
 }
 
-const { loading, fetch } = useRequest<null, [string, IChangePasswordParams]>(changePassword);
+const { loading, fetch } = useRequest<IBaseResponse<null>, [string, IChangePasswordParams]>(changePassword);
 const { modelRef, submit, validateField, validateInfos } = useForm<IChangePasswordParams & { newPassword2: string }>({
   password: '',
   newPassword: '',

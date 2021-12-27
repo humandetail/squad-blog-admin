@@ -3,12 +3,12 @@
   background-color: #262626 !important;
   border-color: #262626 !important;
   &:hover {
-    background-color: #1f1f1f !important;
-    border-color: #1f1f1f !important;
+    background-color: lighten(#1f1f1f, 5%) !important;
+    border-color: lighten(#1f1f1f, 5%) !important;
   }
   &:focus {
-    background-color: #1f1f1f !important;
-    border-color: #1f1f1f !important;
+    background-color: lighten(#1f1f1f, 5%) !important;
+    border-color: lighten(#1f1f1f, 5%) !important;
   }
   &:active {
     background-color: #434343 !important;
@@ -144,6 +144,58 @@
       &.ant-btn-background-ghost {
         color: #555 !important;
         background-color: transparent !important;
+      }
+    }
+  }
+
+  // link
+  &.ant-btn-link {
+    background-color: transparent !important;
+    color: @primary-color !important;
+    border: 0 !important;
+    padding: 0 !important;
+    &:hover {
+      color: #1765ad !important;
+    }
+    &:focus {
+      color: #1765ad !important;
+    }
+    &:active {
+      color: #3c9ae8 !important;
+    }
+    &[disabled] {
+      color: #434343 !important;
+    }
+
+    &.ant-btn-dangerous {
+      color: @error-color !important;
+      &:hover {
+        color: #a61d24 !important;
+      }
+      &:focus {
+        color: #a61d24 !important;
+      }
+      &:active {
+        color: #e84749 !important;
+      }
+      &[disabled] {
+        color: #434343 !important;
+      }
+    }
+
+    &[success] {
+      color: @success-color !important;
+      &:hover {
+        color: #3c8618 !important;
+      }
+      &:focus {
+        color: #3c8618 !important;
+      }
+      &:active {
+        color: #6abe39 !important;
+      }
+      &[disabled] {
+        color: #555 !important;
       }
     }
   }

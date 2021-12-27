@@ -4,15 +4,13 @@ export interface IBaseResponse<T = any> {
   message: string;
 }
 
-export interface IBasePageResponse<T = any> {
-  code: number;
+export interface IBasePageResponse<T = any> extends IBaseResponse {
   data: {
     current: number;
     pageSize: number;
     total: number;
     records: T
-  },
-  message: string;
+  }
 }
 
 export interface IBaseResponseItem {
@@ -23,3 +21,18 @@ export interface IBaseResponseItem {
   createdTime: string;
   updatedTime: string;
 }
+
+export interface IBaseParams {
+  sort?: number;
+  isShow?: number;
+}
+
+export interface IBasePageParams {
+  isShow?: number;
+  current?: number;
+  pageSize?: number;
+  sortField?: string;
+  sortDesc?: number;
+}
+
+export type RecordType = Record<string, any>;

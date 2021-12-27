@@ -1,0 +1,81 @@
+<template>
+  <header class="query-list-head">
+    <div class="search-wrapper">
+      <template v-if="searchVisible">
+        <slot name="search">
+          <InputSearch />
+        </slot>
+      </template>
+    </div>
+
+    <div class="operations-wrapper">
+      <div class="custom-operations">
+        <slot name="customOperations" />
+        <a-button
+          type="primary">
+          <plus-outlined />
+          添加
+        </a-button>
+      </div>
+      <ListOperations
+        v-model:search-visible="searchVisible"
+        :loading="loading"
+        :size="size"
+        :columns="columns"
+        :selected-column-keys="selectedColumnKeys"
+        @update:size="$emit('update:size', $event)"
+        @update:selected-column-keys="$emit('update:selected-column-keys', $event)"
+        @refresh="$emit('refresh')"
+      />
+    </div>
+  </header>
+</template>
+
+<script setup lang="ts">
+import { ESize } from '@/config/constants';
+import { ref } from 'vue';
+import InputSearch from '../../form/InputSearch.vue';
+import ListOperations from './ListOperations.vue';
+
+withDefaults(defineProps<{
+  loading: boolean;
+  size: ESize;
+  columns: Record<string, any>[]
+  selectedColumnKeys: string[]
+}>(), {
+  size: ESize.default
+});
+
+// eslint-disable-next-line func-call-spacing
+defineEmits<{
+  (e: 'refresh'): void;
+  (e: 'update:size', size: ESize): void;
+  (e: 'update:selected-column-keys', columns: string[]): void;
+}>();
+
+const searchVisible = ref(true);
+
+</script>
+
+<style lang="less" scoped>
+.query-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: @margin-md;
+
+  .operations-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .custom-operations {
+      margin-right: @margin-md;
+
+      > :not(:first-of-type) {
+        margin-left: @margin-md;
+      }
+    }
+  }
+}
+</style>

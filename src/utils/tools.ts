@@ -2,6 +2,7 @@ import { JSEncrypt } from 'jsencrypt';
 import publicKey from '@/config/publicKey';
 import { LocationQuery } from 'vue-router';
 import _ from 'lodash';
+import { customAlphabet } from 'nanoid';
 
 export const encryptPassword = (plain: string) => {
   const enc = new JSEncrypt();
@@ -20,4 +21,9 @@ export const getQueryString = (query: LocationQuery, key: string): string => {
   }
 
   return item;
+}
+
+export const getNanoId = (size = 20, alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'): string => {
+  const nanoid = customAlphabet(alphabet, size);
+  return nanoid();
 }

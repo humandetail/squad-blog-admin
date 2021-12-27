@@ -20,14 +20,3 @@ export interface IUserInfo extends Omit<IBaseResponseItem, 'id'> {
   roleId: number;
   roleName: string;
 }
-
-export interface IMenuItem extends IBaseResponseItem {
-  parentId: number;
-  name: string;
-  type: number;
-  router: string;
-  permission: string;
-  path: string;
-  icon: string;
-  isCache: number;
-}

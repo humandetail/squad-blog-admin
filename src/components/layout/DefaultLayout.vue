@@ -33,5 +33,13 @@ import CommonHeader from '@components/common/header/index.vue';
     padding: 16px;
     background-color: #1a1a1a;
   }
+
+  .ant-layout-content {
+    padding: 16px;
+
+    & > [class^="page-"] {
+      height: 100%;
+    }
+  }
 }
 </style>

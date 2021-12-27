@@ -1,6 +1,7 @@
-import { ILoginParams, IChangePasswordParams, IMenuItem, IUserInfo } from '@/types/user';
+import { ILoginParams, IChangePasswordParams, IUserInfo } from '@/types/user';
 import { encryptPassword } from '@/utils/tools';
 import { axiosGet, axiosPost, axiosPut } from '@/utils/http';
+import { IMenuItem } from '@/types/menu';
 
 /**
  * 用户登录
@@ -34,7 +35,7 @@ export function getUserInfo () {
  * 获取用户可访问菜单
  * @returns 用户可访问的菜单
  */
-export function getMenus () {
+export function getAllowMenus () {
   return axiosGet<IMenuItem[]>('/getMenus');
 }
 

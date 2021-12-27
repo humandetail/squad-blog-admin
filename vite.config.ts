@@ -7,7 +7,7 @@ import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';
 export default defineConfig({
   plugins: [
     vue({
-      refTransform: true
+      // refTransform: true
     }),
     ViteComponents({
       customComponentResolvers: [
@@ -58,8 +58,11 @@ export default defineConfig({
           'body-background': '#141414',
           'primary-text': 'rgba(255,255,255,.85)',
           'secondary-text': 'rgba(255,255,255,.65)',
-
-          'card-background': '#1f1f1f'
+          'component-background': '#202020',
+          'table-header-bg': '#292929',
+          'select-item-selected-bg': '#177ddc',
+          'card-background': '#1f1f1f',
+          'margin-md': '16px'
         }
       }
     }

@@ -1,16 +1,14 @@
 import { IBaseResponse } from '@/types/common';
 import { error } from '@/utils/http';
-import { reactive, toRefs } from 'vue';
+import { ref } from 'vue';
 
-export default function useRequest<T, A extends Array<any> = []> (apiFunc: (...args: A) => Promise<IBaseResponse<T>>) {
-  const state = reactive({
-    data: <T>{},
-    loading: false
-  });
+export default function useRequest<T extends IBaseResponse, A extends Array<unknown> = []> (
+  apiFunc: (...args: A) => Promise<T>) {
+  const loading = ref(false);
 
-  const fetch = async (...args: A) => {
+  const fetch = async (...args: A): Promise<T> => {
     try {
-      state.loading = true;
+      loading.value = true;
 
       const res = await apiFunc(...args);
 
@@ -18,18 +16,17 @@ export default function useRequest<T, A extends Array<any> = []> (apiFunc: (...a
         throw res;
       }
 
-      state.data = res.data as any;
-      return Promise.resolve();
+      return Promise.resolve(res);
     } catch (err: any) {
       error(err.message)
       return Promise.reject(err);
     } finally {
-      state.loading = false;
+      loading.value = false;
     }
   }
 
   return {
-    ...toRefs(state),
+    loading,
     fetch
   }
 }
