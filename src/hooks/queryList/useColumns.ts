@@ -1,23 +1,25 @@
 import { TablePaginationConfig } from 'ant-design-vue';
 import { computed, ref } from 'vue';
 
-const useColumns = (columns: Record<string, any>[], pagination?: TablePaginationConfig) => {
-  const columnsWithSequenceNumber = [
-    {
-      dataIndex: 'sequenceNumber',
-      align: 'center',
-      title: '-',
-      width: 60,
-      fixed: 'left',
-      customRender: ({ index }: any) => {
-        const current = pagination?.current || 1;
-        const pageSize = pagination?.pageSize || 10;
+const useColumns = (columns: Record<string, any>[], pagination?: TablePaginationConfig, isTreeData = false) => {
+  const columnsWithSequenceNumber = isTreeData
+    ? columns
+    : [
+        {
+          dataIndex: 'sequenceNumber',
+          align: 'center',
+          title: '-',
+          width: 60,
+          fixed: 'left',
+          customRender: ({ index }: any) => {
+            const current = pagination?.current || 1;
+            const pageSize = pagination?.pageSize || 10;
 
-        return pageSize * (current - 1) + index + 1;
-      }
-    },
-    ...columns
-  ];
+            return pageSize * (current - 1) + index + 1;
+          }
+        },
+        ...columns
+      ];
   const nativeColumns = ref(columnsWithSequenceNumber);
   const selectedColumnKeys = ref<string[]>(columnsWithSequenceNumber.map(({ key, dataIndex }) => dataIndex || key));
 

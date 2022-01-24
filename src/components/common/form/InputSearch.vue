@@ -27,7 +27,6 @@ const emit = defineEmits<{(e: 'search', value: string): void}>();
 const value = ref('');
 
 const handleSearch = (searchValue: string) => {
-  console.log(searchValue);
   emit('search', searchValue.trim());
 }
 </script>

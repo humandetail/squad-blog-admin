@@ -4,20 +4,18 @@
       v-model:size="size"
       :columns="nativeColumns"
       :loading="loading"
+      :show-search="showSearch"
       v-model:selected-column-keys="selectedColumnKeys"
       @refresh="$emit('refresh')">
       <template #search>
-        123
         <slot name="search" />
       </template>
 
       <template #customOperations>
         <slot name="customOperations" />
-        <a-button type="primary">TEST</a-button>
       </template>
     </query-list-head>
-    <!-- <CommonTable></CommonTable> -->
-    <slot name="list">
+    <slot name="table">
       <a-table
         bordered
         :rowKey="rowKey"
@@ -38,7 +36,16 @@
         :scroll="{ x: 'max-content', scrollToFirstRowOnChange: true }"
         :pagination="false"
         @change="handleTableChange"
-        @resizeColumn="handleResizeColumn"></a-table>
+        @resizeColumn="handleResizeColumn"
+        @expand="handleExpand">
+        <template #headerCell="headerCell">
+          <slot name="headerCell" v-bind="headerCell" />
+        </template>
+
+        <template #bodyCell="bodyCell">
+          <slot name="bodyCell" v-bind="bodyCell" />
+        </template>
+      </a-table>
     </slot>
 
     <query-list-foot
@@ -50,14 +57,15 @@
 </template>
 
 <script setup lang="ts">
-import QueryListHead from './head/index.vue';
-import QueryListFoot from './foot/index.vue';
-import { ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { Table, TableProps } from 'ant-design-vue';
+import _ from 'lodash';
 import type { TablePaginationConfig } from 'ant-design-vue';
 import { ESize } from '@/config/constants';
 import { TableDataType } from '@/views/sys/menu/List.vue';
 import { useColumns } from '@/hooks/queryList';
+
+import { QueryListHead, QueryListFoot } from './index';
 
 const props = defineProps({
   rowKey: {
@@ -87,20 +95,31 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-
+  isTreeData: {
+    type: Boolean,
+    default: false
+  },
   loading: {
     type: Boolean,
     default: false
+  },
+  showSearch: {
+    type: Boolean,
+    default: true
   }
 })
-const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys']);
+const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys', 'expand']);
+
+const isTreeData = computed(() => {
+  return props.isTreeData || (props.dataSource as any[]).some(item => _.isArray(item.children));
+});
 
 const {
   nativeColumns,
   selectedColumnKeys,
   currentColumns,
   handleResizeColumn
-} = useColumns(props.columns as Record<string, any>[], props.pagination);
+} = useColumns(props.columns as Record<string, any>[], props.pagination, isTreeData.value);
 
 const size = ref<ESize>(ESize.default);
 
@@ -112,7 +131,8 @@ const handlePaginationChange = (pagination: TablePaginationConfig) => {
   emit('table-change', pagination);
 }
 
-watchEffect(() => {
+const handleExpand = (...args: any[]) => {
+  emit('expand', ...args);
+}
 
-});
 </script>

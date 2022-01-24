@@ -1,7 +1,7 @@
 <template>
   <header class="query-list-head">
     <div class="search-wrapper">
-      <template v-if="searchVisible">
+      <template v-if="showSearch && searchVisible">
         <slot name="search">
           <InputSearch />
         </slot>
@@ -11,11 +11,6 @@
     <div class="operations-wrapper">
       <div class="custom-operations">
         <slot name="customOperations" />
-        <a-button
-          type="primary">
-          <plus-outlined />
-          添加
-        </a-button>
       </div>
       <ListOperations
         v-model:search-visible="searchVisible"
@@ -41,9 +36,11 @@ withDefaults(defineProps<{
   loading: boolean;
   size: ESize;
   columns: Record<string, any>[]
-  selectedColumnKeys: string[]
+  selectedColumnKeys: string[],
+  showSearch: boolean
 }>(), {
-  size: ESize.default
+  size: ESize.default,
+  showSearch: true
 });
 
 // eslint-disable-next-line func-call-spacing

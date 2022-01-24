@@ -20,6 +20,8 @@ export interface IMenuItem extends IBaseResponseItem {
   path: string;
   icon: string;
   isCache: number;
+  hasChildren?: boolean;
+  children?: IMenuItem[];
 }
 
 export interface IMenuItemWithHasChildren extends IMenuItem {

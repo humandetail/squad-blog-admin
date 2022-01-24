@@ -1,7 +1,9 @@
 <template>
   <form-page-card
-    title="新增菜单"
-    :handle-submit="handleSubmit">
+    :title="title"
+    :loading="confirmLoading"
+    :handle-submit="handlePageCardSubmit"
+    :handle-reset="resetFields">
     <a-form
       ref="formRef"
       class="menu-form"
@@ -117,7 +119,7 @@
 <script setup lang="ts">
 import { useFormRef } from '@/hooks/common';
 import { IMenu } from '@/types/menu';
-import { computed, reactive } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { getNanoId } from '@/utils/tools';
 import { permissionReg } from '@/utils/regexp';
 
@@ -130,7 +132,19 @@ const props = withDefaults(defineProps<{
   confirmLoading?: boolean;
   formData?: IMenu
 }>(), {
-  confirmLoading: false
+  confirmLoading: false,
+  formData: () => ({
+    parentId: 0,
+    name: '',
+    type: 1,
+    router: '',
+    permission: '',
+    path: '',
+    icon: '',
+    isCache: 0,
+    isShow: 1,
+    sort: 0
+  })
 });
 
 const emit = defineEmits<{(e: 'submit', data: IMenu): void}>();
@@ -140,18 +154,10 @@ const layout = {
   wrapperCol: { span: 8 }
 }
 
-const formState = reactive(props.formData || {
-  parentId: 0,
-  name: '',
-  type: 1,
-  router: '',
-  permission: '',
-  path: '',
-  icon: '',
-  isCache: 0,
-  isShow: 1,
-  sort: 0
-});
+const formState = ref<IMenu>(props.formData);
+watch(() => props.formData, () => {
+  formState.value = props.formData;
+})
 
 const { formRef, resetFields } = useFormRef();
 
@@ -163,7 +169,7 @@ const defaultRules = {
   ]
 }
 const rules = computed(() => {
-  if (formState.type === 1) {
+  if (formState.value.type === 1) {
     return defaultRules;
     // return formState.parentId === 0
     //   ? defaultRules
@@ -184,11 +190,16 @@ const rules = computed(() => {
 });
 
 const handleGenerateRouter = () => {
-  formState.router = `pages/${getNanoId()}`;
+  formState.value.router = `pages/${getNanoId()}`;
+}
+
+const handlePageCardSubmit = () => {
+  formRef.value.validateFields().then((values: IMenu) => {
+    handleSubmit(values);
+  }).catch(() => {})
 }
 
 const handleSubmit = (values: IMenu) => {
-  console.log('finish', values);
   emit('submit', values);
 }
 </script>

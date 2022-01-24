@@ -36,3 +36,20 @@ export interface IBasePageParams {
 }
 
 export type RecordType = Record<string, any>;
+
+export type OperationButtonType = 'default' | 'primary' | 'danger' | 'success';
+
+export interface IPopConfirm {
+  title?: string;
+  okText?: string;
+  cancelText?: string;
+  icon?: string;
+}
+export interface IOperationButtonProps {
+  text: string;
+  icon?: string;
+  type?: OperationButtonType;
+  handler?: Function,
+  record?: any;
+  popConfirm?: IPopConfirm;
+}

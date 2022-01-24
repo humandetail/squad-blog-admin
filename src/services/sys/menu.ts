@@ -1,6 +1,6 @@
-import { IBasePageResponse } from '@/types/common';
+import { IBasePageParams, IBasePageResponse, IBaseResponse } from '@/types/common';
 import { IMenu, IMenuItem, IMenuItemWithHasChildren, IMenuPageParams } from '@/types/menu';
-import { axiosGet, axiosPost } from '@/utils/http';
+import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 
 /**
  * 创建菜单
@@ -21,10 +21,35 @@ export function getMenus (params: IMenuPageParams) {
 }
 
 /**
+ * 获取菜单详情
+ * @param id
+ * @returns
+ */
+export function getMenuInfo (id: number) {
+  return axiosGet<IMenu, IBaseResponse<IMenu>>(`/menus/${id}`);
+}
+
+/**
  * 获取下级菜单
  * @param parentId - 父级菜单 id
  * @returns
  */
-export function getMenusByParentId (parentId: number) {
-  return axiosGet<IMenuItemWithHasChildren[]>(`/menus/parentId/${parentId}`);
+export function getMenusByParentId (parentId: number, params?: IBasePageParams) {
+  return axiosGet<IMenuItemWithHasChildren[], IBasePageResponse<IMenuItemWithHasChildren[]>>(`/menus/parentId/${parentId}`, { params });
+}
+
+/**
+ * 编辑菜单
+ * @param menu
+ */
+export function editMenu (menu: IMenuItem) {
+  return axiosPut<null>(`/menus/${menu.id}`, menu);
+}
+
+/**
+ * 删除菜单
+ * @param id
+ */
+export function deleteMenu (id: number) {
+  return axiosDelete<null>(`/menus/${id}`);
 }

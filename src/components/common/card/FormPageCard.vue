@@ -18,6 +18,7 @@
         <a-button
           v-if="handleSubmit"
           type="primary"
+          :loading="loading"
           @click="handleSubmit">
           <SaveOutlined />
           提交
@@ -34,6 +35,7 @@ import { useRouter } from 'vue-router';
 
 defineProps<{
   title: string;
+  loading?: boolean;
   handleSubmit?: Function,
   handleReset?: Function
 }>();

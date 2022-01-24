@@ -78,11 +78,6 @@
                 @change="() => handleOptionMenuClick({ key: item.key || item.dataIndex } as MenuInfo)"
                 @click.stop
               />
-              <!-- <a-checkbox
-                :checked="isColOptionChecked(item)"
-                @change="() => console.log(1)">
-                {{ item.title || '-' }}
-              </a-checkbox> -->
               <span style="margin-left: 8px">{{ item.title || '-' }}</span>
             </a-menu-item>
           </a-menu>
@@ -97,8 +92,6 @@ import { ESize } from '@/config/constants';
 import SearchIcon from '@/components/common/icons/SearchIcon.vue';
 import { ref } from 'vue';
 import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
-// import { RecordType } from '@/types/common';
-// import { ColumnsType } from 'ant-design-vue/lib/table/Table';
 
 const props = defineProps<{
   loading: boolean;

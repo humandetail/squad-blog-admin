@@ -1,6 +1,8 @@
 <template>
 <a-layout>
-  <a-layout-sider width="260px"></a-layout-sider>
+  <a-layout-sider width="260px">
+    <CommonAside />
+  </a-layout-sider>
   <a-layout>
     <a-layout-header>
       <CommonHeader />
@@ -11,7 +13,7 @@
           <keep-alive>
             <component
               :is="Component"
-              :key="route.meta.usePathKey ? route.path : undefined"
+              :key="route.fullPath"
             />
           </keep-alive>
         </transition>
@@ -23,6 +25,7 @@
 
 <script setup lang="ts">
 import CommonHeader from '@components/common/header/index.vue';
+import CommonAside from '@components/common/aside/index.vue';
 </script>
 
 <style lang="less" scoped>

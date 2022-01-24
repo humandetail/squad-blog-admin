@@ -1,14 +1,17 @@
 import { TOKEN } from '@/config/constants';
 import router from '@/router';
-import { getUserInfo, logout } from '@/services';
-import { IMenuItem, IUserInfo } from '@/types/user';
+import { getMenus, getUserInfo, logout } from '@/services';
+import { IMenuItem } from '@/types/menu';
+import { IUserInfo } from '@/types/user';
 import { error } from '@/utils/http';
 import { defineStore } from 'pinia';
+import { RouteRecordRaw } from 'vue-router';
 
 interface IUserState {
   token: string;
   userInfo: IUserInfo | null;
-  menus: IMenuItem[]
+  menus: IMenuItem[],
+  routes: RouteRecordRaw[]
 }
 
 const token = localStorage.getItem(TOKEN) || '';
@@ -17,7 +20,8 @@ export const useUserStore = defineStore('user', {
   state: () => (<IUserState>{
     token,
     userInfo: null,
-    menus: []
+    menus: [],
+    routes: []
   }),
 
   actions: {
@@ -39,8 +43,20 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    setMenus (menus: IMenuItem[]) {
-      this.menus = menus;
+    async setMenus () {
+      try {
+        const res = await getMenus({ isAll: 1 });
+        if (res.code !== 200) {
+          throw res;
+        }
+        this.menus = res.data.records;
+      } catch (err: any) {
+        error(err.message);
+      }
+    },
+
+    setRoutes (routes: RouteRecordRaw[]) {
+      this.routes = routes;
     },
 
     async logout () {

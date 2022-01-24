@@ -21,7 +21,8 @@
       "@views/*": ["./src/views/*"],
       "@config/*": ["./src/config/*"],
       "@types/*": ["./src/types/*"]
-    }
+    },
+    "allowJs": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

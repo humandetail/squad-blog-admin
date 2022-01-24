@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue';
+import { computed, defineAsyncComponent, ref } from 'vue';
 import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 import { useUserStore } from '@/store/user';
 
@@ -53,10 +53,9 @@ const ChangePasswordForm = defineAsyncComponent(() => import('./ChangePasswordFo
 
 const showChangePasswordModal = ref(false);
 const userStore = useUserStore();
-const userInfo = userStore.userInfo!;
+const userInfo = computed(() => userStore.userInfo || null);
 
 const handleMenuClick = ({ key }: MenuInfo) => {
-  console.log(key);
   switch (key) {
     case 'change-password':
       showChangePasswordModal.value = true;

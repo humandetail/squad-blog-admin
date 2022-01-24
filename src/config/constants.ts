@@ -5,3 +5,8 @@ export enum ESize {
   'middle' = 'middle',
   'small' = 'small'
 };
+
+export enum EMenuType {
+  '菜单' = 1,
+  '权限' = 2
+}
