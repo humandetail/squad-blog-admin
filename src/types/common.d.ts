@@ -53,3 +53,5 @@ export interface IOperationButtonProps {
   record?: any;
   popConfirm?: IPopConfirm;
 }
+
+export type ZeroOrOneType = 0 | 1;

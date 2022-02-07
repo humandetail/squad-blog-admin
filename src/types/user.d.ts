@@ -20,3 +20,8 @@ export interface IUserInfo extends Omit<IBaseResponseItem, 'id'> {
   roleId: number;
   roleName: string;
 }
+
+export type RegisterUserType = {
+  username: string;
+  password: string;
+};

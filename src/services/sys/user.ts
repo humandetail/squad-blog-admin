@@ -1,7 +1,8 @@
-import { ILoginParams, IChangePasswordParams, IUserInfo } from '@/types/user';
+import { ILoginParams, IChangePasswordParams, IUserInfo, RegisterUserType } from '@/types/user';
 import { encryptPassword } from '@/utils/tools';
-import { axiosGet, axiosPost, axiosPut } from '@/utils/http';
+import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 import { IMenuItem } from '@/types/menu';
+import { IBasePageParams, IBasePageResponse, ZeroOrOneType } from '@/types/common';
 
 /**
  * 用户登录
@@ -44,4 +45,33 @@ export function getAllowMenus () {
  */
 export function changePassword (id: string, data: IChangePasswordParams) {
   return axiosPut(`/users/${id}/password`, data);
+}
+
+/**
+ * 获取用户列表
+ */
+export function getUsers (params: IBasePageParams) {
+  return axiosGet<IUserInfo[], IBasePageResponse>('/users', { params });
+}
+
+/**
+ * 用户注册
+ */
+export function registerUser (data: RegisterUserType) {
+  console.log(data);
+  return axiosPost<null>('/users', data);
+}
+
+/**
+ * 锁定/解锁用户
+ */
+export function setUserLockStatus (id: string, isLock: ZeroOrOneType) {
+  return axiosPut<null>(`/users/${id}/lock`, { isLock });
+}
+
+/**
+ * 删除用户
+ */
+export function deleteUser (id: string) {
+  return axiosDelete<null>(`/users/${id}`);
 }
