@@ -30,7 +30,17 @@ export const getNanoId = (size = 20, alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcde
 }
 
 export const showDashes = (value: any) => {
-  return !_.isEmpty(value) ? value : '-';
+  const valueType = typeof value;
+  if (
+    (valueType === 'number' && !_.isNaN(value)) ||
+    (valueType === 'string' && value) ||
+    !_.isEmpty(value) ||
+    value
+  ) {
+    return value;
+  }
+
+  return '-';
 }
 
 export const str2UpperCamelCase = (str: string) => {
