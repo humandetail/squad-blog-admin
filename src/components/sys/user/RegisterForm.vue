@@ -58,7 +58,7 @@ import { RegisterUserType } from '@/types/user';
 import { useFormRef } from '@/hooks/common';
 import { RuleObject } from 'ant-design-vue/lib/form';
 import { passwordReg, usernameReg } from '@/utils/regexp';
-import { userMsg } from '@/utils/validateMessage';
+import { userMsg } from '@/config/validateMessage';
 
 type RegisterUserWithConfirmType = RegisterUserType & { password2: string };
 

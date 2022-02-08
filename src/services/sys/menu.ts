@@ -1,4 +1,4 @@
-import { IBasePageParams, IBasePageResponse, IBaseResponse } from '@/types/common';
+import { IBasePageParams, IBasePageResponse, IBaseResponse, ZeroOrOneType } from '@/types/common';
 import { IMenu, IMenuItem, IMenuItemWithHasChildren, IMenuPageParams } from '@/types/menu';
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 
@@ -52,4 +52,11 @@ export function editMenu (menu: IMenuItem) {
  */
 export function deleteMenu (id: number) {
   return axiosDelete<null>(`/menus/${id}`);
+}
+
+/**
+ * 切换菜单显示/隐藏状态
+ */
+export function toggleMenuIsShow (id: number, isShow: ZeroOrOneType) {
+  return axiosPut<null>(`/menus/${id}/show`, { isShow });
 }

@@ -20,7 +20,7 @@ import { success } from '@/utils/http';
 
 import RoleForm from '@/components/sys/role/Form.vue';
 import { getQueryString } from '@/utils/tools';
-import { useFetchRoleInfo } from '@/hooks/role';
+import { useFetchRoleInfo } from '@/hooks/sys/role';
 import { editRole } from '@/services';
 
 const router = useRouter();
@@ -35,6 +35,6 @@ const { loading, fetch } = useRequest<IBaseResponse<null>, [IRole]>(editRole);
 const handleSubmit = async (data: IRole) => {
   await fetch({ id, ...data } as IRole);
   success('角色编辑成功')
-  router.push({ name: '角色列表' });
+  router.push({ name: '角色管理' });
 }
 </script>

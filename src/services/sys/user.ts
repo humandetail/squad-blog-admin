@@ -58,7 +58,6 @@ export function getUsers (params: IBasePageParams) {
  * 用户注册
  */
 export function registerUser (data: RegisterUserType) {
-  console.log(data);
   return axiosPost<null>('/users', data);
 }
 

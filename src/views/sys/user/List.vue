@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { QueryList, BooleanCell, ListOperations } from '@/components/common/queryList';
-import { useDeleteUser, useLockUser, useUserList } from '@/hooks/user';
+import { useDeleteUser, useLockUser, useUserList } from '@/hooks/sys/user';
 import { computed, onActivated } from 'vue';
 import { useRouter } from 'vue-router';
 

@@ -6,7 +6,7 @@ import { IUserInfo } from '@/types/user';
 import { showDashes } from '@/utils/tools';
 import { TableColumnType } from 'ant-design-vue';
 import { computed } from 'vue';
-import { useQueryList } from '../queryList';
+import { useQueryList } from '../../common/queryList';
 
 type TableDataType = {
   id: string;

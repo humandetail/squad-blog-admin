@@ -1,6 +1,6 @@
 <template>
   <div class="page-sys-role-list">
-    <a-spin :spinning="deleteLoading">
+    <a-spin :spinning="spinning">
       <query-list
         row-key="id"
         :loading="loading"
@@ -59,14 +59,15 @@
 </template>
 
 <script setup lang="ts">
-import { onActivated, ref } from 'vue';
+import { computed, onActivated, ref } from 'vue';
 
 import { QueryList, BooleanCell, ListOperations } from '@/components/common/queryList';
-import useRoleList from '@/hooks/role/useRoleList';
-import useDeleteRole from '@/hooks/role/useDeleteRole';
+import { useRoleList } from '@/hooks/sys/role';
 import { useRouter } from 'vue-router';
-import useDefineAsyncComponent from '@/hooks/common/useDefineAsyncComponent';
+import { useDefineAsyncComponent } from '@/hooks/common';
 import { IRoleItem } from '@/types/role';
+import { useToggleIsShow, useDeleteItem } from '@/hooks/common/queryList';
+import { deleteMenu, toggleRoleIsShow } from '@/services';
 
 const AuthorizationModal = useDefineAsyncComponent('/components/sys/role/AuthorizationModal.vue');
 
@@ -78,7 +79,17 @@ const currentRoleItem = ref<IRoleItem>();
 const {
   loading: deleteLoading,
   handleDelete
-} = useDeleteRole(async () => {
+} = useDeleteItem(
+  deleteMenu,
+  async () => {
+    handleSearch();
+  }
+);
+
+const {
+  loading: toggleIsShowLoading,
+  handleToggleIsShow
+} = useToggleIsShow(toggleRoleIsShow, () => {
   handleSearch();
 });
 
@@ -98,8 +109,11 @@ const {
   getOperations
 } = useRoleList({
   handleAuthorizeBtnClick: toggleAuthorizationModal.bind(null, true),
-  handleDelete
+  handleDelete,
+  handleToggleIsShow
 });
+
+const spinning = computed(() => deleteLoading.value || toggleIsShowLoading.value);
 
 onActivated(async () => {
   await handleSearch();

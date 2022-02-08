@@ -1,30 +1,32 @@
 import commonColumns from '@/config/commonColumns';
 import { getRoles } from '@/services';
-import { IBasePageResponse, IOperationButtonProps } from '@/types/common';
+import { IBasePageResponse, IOperationButtonProps, ZeroOrOneType } from '@/types/common';
 import { IRoleItem } from '@/types/role';
-import { showDashes } from '@/utils/tools';
+import { getIsShowOperation, showDashes } from '@/utils/tools';
 import { TableColumnType } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
-import { useQueryList } from '../queryList';
+import { useQueryList } from '../../common/queryList';
+
+type TableDataType = {
+  id: number;
+  name: string;
+  remarks: string;
+  isShow: boolean;
+  sort: number;
+  createdTime: Date;
+  updatedTime: Date;
+  operator: string;
+}
 
 const useRoleList = ({
   handleDelete,
-  handleAuthorizeBtnClick
+  handleAuthorizeBtnClick,
+  handleToggleIsShow
 }: {
   handleDelete: (id: number) => void;
   handleAuthorizeBtnClick: (role: IRoleItem) => void;
+  handleToggleIsShow: (id: number, isShow: ZeroOrOneType) => void;
 }) => {
-  type TableDataType = {
-    id: number;
-    name: string;
-    remarks: string;
-    isShow: boolean;
-    sort: number;
-    createdTime: Date;
-    updatedTime: Date;
-    operator: string;
-  }
-
   const router = useRouter();
 
   const {
@@ -65,8 +67,8 @@ const useRoleList = ({
       title: '操作',
       dataIndex: 'operations',
       fixed: 'right',
-      width: 160,
-      minWidth: 160
+      width: 200,
+      minWidth: 200
     }
   ];
 
@@ -76,6 +78,9 @@ const useRoleList = ({
     }
 
     return [
+      getIsShowOperation(record, () => {
+        handleToggleIsShow(record.id, record.isShow);
+      }),
       {
         text: '授权',
         type: 'primary',

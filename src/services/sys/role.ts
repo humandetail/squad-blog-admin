@@ -1,4 +1,4 @@
-import { IBasePageResponse } from '@/types/common';
+import { IBasePageResponse, ZeroOrOneType } from '@/types/common';
 import { IRole, IRoleItem, IRolePageParams } from '@/types/role';
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 
@@ -48,4 +48,11 @@ export function authorizations (id: number, menus: number[]) {
  */
 export function editRole (role: IRole) {
   return axiosPut<null>(`/roles/${role.id}`, role);
+}
+
+/**
+ * 切换角色显示/隐藏状态
+ */
+export function toggleRoleIsShow (id: number, isShow: ZeroOrOneType) {
+  return axiosPut<null>(`/roles/${id}/show`, { isShow });
 }

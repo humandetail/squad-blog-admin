@@ -1,5 +1,3 @@
-// 一些表单检验的提示语
-
 export const userMsg = {
   username: {
     required: '请输入用户名',

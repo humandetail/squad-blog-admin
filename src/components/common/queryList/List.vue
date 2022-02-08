@@ -62,8 +62,7 @@ import { Table, TableProps } from 'ant-design-vue';
 import _ from 'lodash';
 import type { TablePaginationConfig } from 'ant-design-vue';
 import { ESize } from '@/config/constants';
-import { TableDataType } from '@/views/sys/menu/List.vue';
-import { useColumns } from '@/hooks/queryList';
+import { useColumns } from '@/hooks/common/queryList';
 
 import { QueryListHead, QueryListFoot } from './index';
 
@@ -123,7 +122,7 @@ const {
 
 const size = ref<ESize>(ESize.default);
 
-const handleTableChange: TableProps<TableDataType>['onChange'] = (pagination, filters, sorter, extra) => {
+const handleTableChange: TableProps<Record<any, any>>['onChange'] = (pagination, filters, sorter, extra) => {
   emit('table-change', pagination, filters, sorter, extra);
 }
 

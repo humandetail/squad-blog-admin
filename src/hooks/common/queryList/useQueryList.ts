@@ -2,7 +2,7 @@ import { IBasePageResponse } from '@/types/common';
 import { TableProps } from 'ant-design-vue';
 import type { TablePaginationConfig } from 'ant-design-vue';
 import { computed, ref } from 'vue';
-import { useRequest } from '../common';
+import { useRequest } from '..';
 import _ from 'lodash';
 
 const useQueryList = <T, R extends IBasePageResponse>(apiFunc: (...args: any[]) => Promise<R>) => {
