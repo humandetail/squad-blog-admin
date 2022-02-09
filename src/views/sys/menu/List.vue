@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onActivated } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDeleteItem, useToggleIsShow } from '@/hooks/common/queryList';
 import { toggleMenuIsShow, deleteMenu } from '@/services';
@@ -99,7 +99,7 @@ const {
 
 const spinning = computed(() => deleteLoading.value || toggleIsShowLoading.value || expandLoading.value);
 
-onActivated(async () => {
+onMounted(async () => {
   await handleSearch();
 });
 

@@ -2,6 +2,7 @@ import NProgress from 'nprogress';
 import _ from 'lodash';
 import router from './index';
 import { useUserStore } from '../store/user';
+import { useCommonStore } from '../store/common';
 import { generateDynamicRoutes } from './generateDynamicRoutes';
 import { getQueryString } from '@/utils/tools';
 
@@ -50,6 +51,15 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-router.afterEach(() => {
+router.afterEach((to) => {
+  // 收集菜单链
+  const commonStore = useCommonStore();
+  commonStore.setMenuChains({
+    id: to.meta.id as number,
+    parentId: to.meta.parentId as number,
+    title: to.meta.title as string,
+    icon: to.meta.icon as string,
+    router: to.path
+  })
   NProgress.done();
 });

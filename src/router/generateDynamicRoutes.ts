@@ -33,7 +33,7 @@ const generator = (menus: IMenuItem[]): RouteRecordRaw[] => {
   return menus.map(menu => {
     const { id, parentId, name, router, path, icon, isShow, isCache } = menu;
     const currentRoute: RouteRecordRaw = {
-      path: router ? `/${router}` : '', // 路由 path
+      path: router ? `/${router}` : '/', // 路由 path
       name: name, // 路由名称(唯一)
       component: () => path ? import(`../views/${path}${/\.vue$/.test(path) ? '' : '.vue'}`) : import('../views/Home.vue'),
       meta: {
