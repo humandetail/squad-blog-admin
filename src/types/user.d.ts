@@ -1,4 +1,4 @@
-import { IBaseResponseItem } from './common';
+import { IBaseResponseItem, ZeroOrOneType } from './common';
 
 export interface ILoginParams {
   username: string;
@@ -25,3 +25,8 @@ export type RegisterUserType = {
   username: string;
   password: string;
 };
+
+export type IUserManage = {
+  isLock?: ZeroOrOneType;
+  roleId?: number;
+}

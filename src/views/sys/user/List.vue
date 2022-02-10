@@ -42,23 +42,42 @@
         </template>
       </query-list>
     </a-spin>
+
+    <SetRoleModal
+      v-if="setRoleModalVisible"
+      :user-info="userInfo"
+      @success="handleSetRoleSuccess"
+      @close="setRoleModalVisible = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { QueryList, BooleanCell, ListOperations } from '@/components/common/queryList';
-import { useDeleteUser, useLockUser, useUserList } from '@/hooks/sys/user';
-import { computed, onActivated } from 'vue';
+import { useDefineAsyncComponent } from '@/hooks/common';
+import { useDeleteUser, useUserManage, useUserList } from '@/hooks/sys/user';
+import { IUserInfo } from '@/types/user';
+import { computed, onActivated, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
+const SetRoleModal = useDefineAsyncComponent('/components/sys/user/SetRoleModal.vue');
 
-const { loading: lockLoading, handleLock } = useLockUser(async () => {
+const router = useRouter();
+const setRoleModalVisible = ref(false);
+const userInfo = ref<IUserInfo | null>(null);
+
+const { loading: lockLoading, handleManage } = useUserManage(async () => {
   await handleSearch()
 });
 const { loading: deleteLoading, handleDelete } = useDeleteUser(async () => {
   await handleSearch()
 });
+
+const handleSetRoleBtnClick = (info: IUserInfo) => {
+  userInfo.value = info;
+  setRoleModalVisible.value = true;
+}
+
 const {
   columns,
   dataSource,
@@ -68,7 +87,7 @@ const {
   handleSearch,
   handleTableChange,
   getOperations
-} = useUserList({ handleLock, handleDelete });
+} = useUserList({ handleManage, handleDelete, handleSetRoleBtnClick });
 
 const spinning = computed(() => {
   return lockLoading.value || deleteLoading.value;
@@ -80,5 +99,10 @@ onActivated(async () => {
 
 const handleAdd = () => {
   router.push({ name: '新增用户' });
+}
+
+const handleSetRoleSuccess = () => {
+  setRoleModalVisible.value = false;
+  handleSearch();
 }
 </script>

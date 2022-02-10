@@ -2,7 +2,7 @@ import commonColumns from '@/config/commonColumns';
 import { getUsers } from '@/services';
 import { useUserStore } from '@/store/user';
 import { IBasePageResponse, IOperationButtonProps, ZeroOrOneType } from '@/types/common';
-import { IUserInfo } from '@/types/user';
+import { IUserInfo, IUserManage } from '@/types/user';
 import { showDashes } from '@/utils/tools';
 import { TableColumnType } from 'ant-design-vue';
 import { computed } from 'vue';
@@ -25,11 +25,13 @@ type TableDataType = {
 }
 
 export default ({
-  handleLock,
-  handleDelete
+  handleManage,
+  handleDelete,
+  handleSetRoleBtnClick
 }: {
-  handleLock: (id: string, isLock: ZeroOrOneType) => void;
+  handleManage: (id: string, data: IUserManage) => void;
   handleDelete: (id: string) => void;
+  handleSetRoleBtnClick: (record: IUserInfo) => void;
 }) => {
   const userStore = useUserStore();
   const userInfo = computed(() => userStore.userInfo || null);
@@ -106,10 +108,17 @@ export default ({
       ? []
       : [
           {
+            text: '分配角色',
+            type: 'primary',
+            handler: () => {
+              handleSetRoleBtnClick(record)
+            }
+          },
+          {
             text: record.isLock ? '解锁' : '锁定',
             type: 'danger',
             handler: () => {
-              handleLock(record.id, record.isLock === 1 ? 0 : 1);
+              handleManage(record.id, { isLock: record.isLock === 1 ? 0 : 1 });
             }
           },
           {

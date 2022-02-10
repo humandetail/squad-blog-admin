@@ -21,6 +21,13 @@ export function getMenus (params: IMenuPageParams) {
 }
 
 /**
+ * 获取用户允许访问的菜单/权限
+ */
+export function getAllowMenus () {
+  return axiosGet<IMenuItem[], IBasePageResponse<IMenuItem[]>>('/getMenus');
+}
+
+/**
  * 获取菜单详情
  * @param id
  * @returns

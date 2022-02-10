@@ -1,9 +1,9 @@
 import useDeleteUser from './useDeleteUser';
-import useLockUser from './useLockUser';
+import useUserManage from './useUserManage';
 import useUserList from './useUserList';
 
 export {
   useDeleteUser,
-  useLockUser,
+  useUserManage,
   useUserList
 }

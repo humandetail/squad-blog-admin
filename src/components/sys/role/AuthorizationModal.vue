@@ -17,6 +17,7 @@
           :height="400"
           defaultExpandAll
           checkable
+          checkStrictly
         />
       </div>
     </a-spin>
@@ -44,7 +45,10 @@ const emit = defineEmits<{
 }>();
 
 const menus = ref<IMenuItem[]>([]);
-const checkedKeys = ref<number[]>([]);
+const checkedKeys = ref<{ checked: number[], halfChecked: number[] }>({
+  checked: [],
+  halfChecked: []
+});
 
 const { loading: initLoading, fetch: fetchMenus } = useRequest<IBasePageResponse<IMenuItem[]>, [IMenuPageParams]>(getMenus);
 const { loading: confirmLoading, fetch: handleAuthorize } = useRequest<IBaseResponse<null>, [number, number[]]>(authorizations);
@@ -62,7 +66,7 @@ const treeData = computed(() => {
 
 onMounted(async () => {
   // 获取角色当前拥有的权限
-  checkedKeys.value = props.role.menus.map(({ id }) => id);
+  checkedKeys.value.checked = props.role.menus.map(({ id }) => id);
   if (_.isEmpty(menus.value)) {
     const { data } = await fetchMenus({ isAll: 1 });
     menus.value = data?.records || [];
@@ -70,7 +74,19 @@ onMounted(async () => {
 })
 
 const handleConfirm = async () => {
-  await handleAuthorize(props.role.id, checkedKeys.value);
+  // 需要把上级的权限也加上
+  const { checked: _keys } = checkedKeys.value;
+  const _menus = menus.value;
+  const values: number[] = [];
+  for (const key of _keys) {
+    let parent = _menus.find(({ id }) => id === key);
+    values.push(key);
+    while (parent && parent.id >= 0) {
+      values.push(parent.id);
+      parent = _menus.find(({ id }) => id === parent!.parentId);
+    }
+  }
+  await handleAuthorize(props.role.id, [...new Set(values)]);
   success('操作成功');
   emit('success');
 }

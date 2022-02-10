@@ -1,4 +1,4 @@
-import { ILoginParams, IChangePasswordParams, IUserInfo, RegisterUserType } from '@/types/user';
+import { ILoginParams, IChangePasswordParams, IUserInfo, RegisterUserType, IUserManage } from '@/types/user';
 import { encryptPassword } from '@/utils/tools';
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 import { IMenuItem } from '@/types/menu';
@@ -33,14 +33,6 @@ export function getUserInfo () {
 }
 
 /**
- * 获取用户可访问菜单
- * @returns 用户可访问的菜单
- */
-export function getAllowMenus () {
-  return axiosGet<IMenuItem[]>('/getMenus');
-}
-
-/**
  * 修改用户密码
  */
 export function changePassword (id: string, data: IChangePasswordParams) {
@@ -62,10 +54,12 @@ export function registerUser (data: RegisterUserType) {
 }
 
 /**
- * 锁定/解锁用户
+ * 用户管理：分配角色、锁定、解锁用户
+ * @param id 用户 id
+ * @param data
  */
-export function setUserLockStatus (id: string, isLock: ZeroOrOneType) {
-  return axiosPut<null>(`/users/${id}/lock`, { isLock });
+export function userManage (id: string, { isLock, roleId }: IUserManage) {
+  return axiosPut<null>(`/users/${id}/manage`, isLock ? { isLock } : { roleId });
 }
 
 /**

@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import commonColumns from '@/config/commonColumns';
-import { getMenusByParentId, getRoles } from '@/services';
+import { getMenusByParentId } from '@/services';
 import { IBasePageResponse, IOperationButtonProps, ZeroOrOneType } from '@/types/common';
 import { IMenuItem } from '@/types/menu';
 import { getIsShowOperation, showDashes } from '@/utils/tools';

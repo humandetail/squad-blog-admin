@@ -10,7 +10,7 @@ NProgress.configure({
   showSpinner: false
 });
 
-const whiteList = ['/login'];
+const whiteList = ['/login', '/exception/503'];
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
       // 无 token 直接跳回首页
       next({ path: 'login', query: { redirect: to.fullPath } })
     } else {
-      if (_.isEmpty(userStore.userInfo) || _.isEmpty(userStore.menus)) {
+      if (!userStore.userInfo || !userStore.menus || _.isEmpty(userStore.userInfo) || _.isEmpty(userStore.menus)) {
         try {
           await Promise.all([
             userStore.setUserInfo(),
