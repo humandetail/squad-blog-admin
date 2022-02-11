@@ -29,6 +29,7 @@ export interface IBaseParams {
 }
 
 export interface IBasePageParams {
+  keyword?: string;
   isShow?: number;
   current?: number;
   pageSize?: number;

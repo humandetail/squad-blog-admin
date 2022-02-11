@@ -3,7 +3,7 @@
     <div class="search-wrapper">
       <template v-if="showSearch && searchVisible">
         <slot name="search">
-          <InputSearch />
+          <InputSearch @search="$emit('search', $event)" />
         </slot>
       </template>
     </div>
@@ -48,6 +48,7 @@ defineEmits<{
   (e: 'refresh'): void;
   (e: 'update:size', size: ESize): void;
   (e: 'update:selected-column-keys', columns: string[]): void;
+  (e: 'search', keyword: string): void
 }>();
 
 const searchVisible = ref(true);

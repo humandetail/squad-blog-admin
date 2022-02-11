@@ -6,7 +6,8 @@
       :loading="loading"
       :show-search="showSearch"
       v-model:selected-column-keys="selectedColumnKeys"
-      @refresh="$emit('refresh')">
+      @refresh="$emit('refresh')"
+      @search="$emit('search', $event)">
       <template #search>
         <slot name="search" />
       </template>
@@ -107,7 +108,7 @@ const props = defineProps({
     default: true
   }
 })
-const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys', 'expand']);
+const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys', 'expand', 'search']);
 
 const isTreeData = computed(() => {
   return props.isTreeData || (props.dataSource as any[]).some(item => _.isArray(item.children));
@@ -133,5 +134,4 @@ const handlePaginationChange = (pagination: TablePaginationConfig) => {
 const handleExpand = (...args: any[]) => {
   emit('expand', ...args);
 }
-
 </script>

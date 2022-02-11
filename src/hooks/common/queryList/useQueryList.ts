@@ -28,7 +28,13 @@ const useQueryList = <T, R extends IBasePageResponse>(apiFunc: (...args: any[]) 
 
   const { loading, fetch } = useRequest<R, any[]>(apiFunc);
 
-  const handleSearch = async () => {
+  const handleSearch = async (otherParams: Record<any, any> = {}) => {
+    if (!_.isEmpty(params)) {
+      params.value = {
+        ...params.value,
+        ...otherParams
+      }
+    }
     const res = await fetch(queryParams.value);
     dataSource.value = res.data.records;
     pagination.value.total = res.data.total;
