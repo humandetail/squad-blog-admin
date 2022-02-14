@@ -5,6 +5,7 @@
       :columns="nativeColumns"
       :loading="loading"
       :show-search="showSearch"
+      :is-table="isTable"
       v-model:selected-column-keys="selectedColumnKeys"
       @refresh="$emit('refresh')"
       @search="$emit('search', $event)">
@@ -104,6 +105,10 @@ const props = defineProps({
     default: false
   },
   showSearch: {
+    type: Boolean,
+    default: true
+  },
+  isTable: {
     type: Boolean,
     default: true
   }

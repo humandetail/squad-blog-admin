@@ -18,6 +18,7 @@
         :size="size"
         :columns="columns"
         :selected-column-keys="selectedColumnKeys"
+        :is-table="isTable"
         @update:size="$emit('update:size', $event)"
         @update:selected-column-keys="$emit('update:selected-column-keys', $event)"
         @refresh="$emit('refresh')"
@@ -37,10 +38,12 @@ withDefaults(defineProps<{
   size: ESize;
   columns: Record<string, any>[]
   selectedColumnKeys: string[],
-  showSearch: boolean
+  showSearch: boolean,
+  isTable: boolean;
 }>(), {
   size: ESize.default,
-  showSearch: true
+  showSearch: true,
+  isTable: true
 });
 
 // eslint-disable-next-line func-call-spacing

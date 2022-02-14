@@ -23,6 +23,7 @@
     </a-tooltip>
 
     <a-tooltip
+      v-if="isTable"
       :placement="placement"
       title="切换表格尺寸">
       <a-dropdown
@@ -54,6 +55,7 @@
     </a-tooltip>
 
     <a-tooltip
+      v-if="isTable"
       :placement="placement"
       title="列筛选">
       <a-dropdown
@@ -98,7 +100,8 @@ const props = defineProps<{
   searchVisible: boolean;
   size: ESize,
   columns: Record<string, any>[],
-  selectedColumnKeys: string[]
+  selectedColumnKeys: string[],
+  isTable: boolean;
 }>();
 
 // eslint-disable-next-line func-call-spacing
