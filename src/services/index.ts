@@ -4,3 +4,4 @@ export * from './sys/role';
 
 export * from './resource/picture';
 export * from './resource/pictureCategory';
+export * from './resource/blogroll';

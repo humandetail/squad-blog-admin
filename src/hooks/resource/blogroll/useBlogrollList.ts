@@ -1,13 +1,15 @@
 import commonColumns from '@/config/commonColumns';
-import { getPictureCategories } from '@/services';
+import { getBlogrolls, getPictureCategories } from '@/services';
+import { IBlogrollItem } from '@/types/blogroll';
 import { IBasePageResponse, IOperationButtonProps, ZeroOrOneType } from '@/types/common';
 import { IPictureCategoryItem } from '@/types/pictureCategory';
+import { IRoleItem } from '@/types/role';
 import { getIsShowOperation } from '@/utils/tools';
 import { TableColumnType } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
-import { useQueryList } from '../../../common/queryList';
+import { useQueryList } from '../../common/queryList';
 
-const usePictureCategoryList = ({
+const useBlogrollList = ({
   handleDelete,
   handleToggleIsShow
 }: {
@@ -23,11 +25,11 @@ const usePictureCategoryList = ({
     loading,
     handleSearch,
     handleTableChange
-  } = useQueryList<IPictureCategoryItem, IBasePageResponse<IPictureCategoryItem[]>>(getPictureCategories);
+  } = useQueryList<IBlogrollItem, IBasePageResponse<IBlogrollItem[]>>(getBlogrolls);
 
-  const columns: TableColumnType<IPictureCategoryItem>[] = [
+  const columns: TableColumnType<IBlogrollItem>[] = [
     {
-      title: '分类名称',
+      title: '友链名称',
       dataIndex: 'name',
       resizable: true,
       fixed: true,
@@ -35,8 +37,15 @@ const usePictureCategoryList = ({
       minWidth: 160
     },
     {
-      title: '显示名称',
-      dataIndex: 'displayName',
+      title: '链接地址',
+      dataIndex: 'link',
+      resizable: true,
+      width: 200,
+      minWidth: 200
+    },
+    {
+      title: '备注信息',
+      dataIndex: 'remarks',
       resizable: true,
       width: 250,
       minWidth: 250
@@ -51,7 +60,7 @@ const usePictureCategoryList = ({
     }
   ];
 
-  const getOperations = (record: IPictureCategoryItem): IOperationButtonProps[] => {
+  const getOperations = (record: IBlogrollItem): IOperationButtonProps[] => {
     return [
       getIsShowOperation(record, () => {
         handleToggleIsShow(record.id, record.isShow);
@@ -61,7 +70,7 @@ const usePictureCategoryList = ({
         type: 'success',
         handler: () => {
           router.push({
-            name: '编辑图片分类',
+            name: '编辑友情链接',
             params: {
               id: record.id
             }
@@ -90,4 +99,4 @@ const usePictureCategoryList = ({
   }
 }
 
-export default usePictureCategoryList;
+export default useBlogrollList;
