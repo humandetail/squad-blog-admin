@@ -58,6 +58,6 @@ export const togglePictureIsShow = (id: number, isShow: ZeroOrOneType) => {
 /**
  * 删除图片
  */
-export function deletePicutre (id: number) {
+export function deletePicture (id: number) {
   return axiosDelete<null>(`/pictures/${id}`);
 }

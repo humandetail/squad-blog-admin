@@ -52,7 +52,7 @@ import { computed } from 'vue';
 import { DynamicIcon } from '@/components/common/icons';
 import { useRouter } from 'vue-router';
 import { useRequest } from '@/hooks/common';
-import { deletePicutre, togglePictureIsShow } from '@/services';
+import { deletePicture, togglePictureIsShow } from '@/services';
 import { IBaseResponse } from '@/types/common';
 import { success } from '@/utils/http';
 import { useToggleIsShow } from '@/hooks/common/queryList';
@@ -65,7 +65,7 @@ const emit = defineEmits<{(e: 'refresh'): void}>();
 
 const router = useRouter();
 
-const { loading: deleteLoading, fetch: deleteFetch } = useRequest<IBaseResponse<null>, [number]>(deletePicutre);
+const { loading: deleteLoading, fetch: deleteFetch } = useRequest<IBaseResponse<null>, [number]>(deletePicture);
 const { loading: isShowLoading, handleToggleIsShow } = useToggleIsShow(togglePictureIsShow, () => {
   success('操作成功');
   emit('refresh');
