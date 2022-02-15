@@ -89,7 +89,7 @@ const props = defineProps({
       total: 0,
       current: 1,
       pageSize: 10,
-      pageSizeOption: ['10', '20', '50', '100', '200']
+      pageSizeOptions: ['10', '20', '50', '100', '200']
     })
   },
   selectedRowKeys: {
