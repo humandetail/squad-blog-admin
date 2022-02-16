@@ -1,6 +1,7 @@
 <template>
   <a-input-search
     class="input-search"
+    allow-clear
     v-model:value.trim="value"
     @search="handleSearch">
     <template #enterButton>
