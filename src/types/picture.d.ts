@@ -12,3 +12,8 @@ export interface IPicture extends IBaseParams {
   categoryId: number;
   file: File | null
 }
+
+export type SelectedPicture = {
+  id: number;
+  url: string;
+}

@@ -5,7 +5,7 @@ import { axiosDelete, axiosGet, axiosPost, axiosPut } from '@/utils/http';
 /**
  * 获取图片列表
  */
-export function getPictures (params: IBaseParams) {
+export function getPictures (params: IBaseParams & { categoryId?: number }) {
   return axiosGet<IPictureItem[], IBasePageResponse<IPictureItem[]>>('/pictures', {
     params
   });
