@@ -6,3 +6,5 @@ export * from './resource/picture';
 export * from './resource/pictureCategory';
 export * from './resource/blogroll';
 export * from './resource/template';
+
+export * from './post/postCategory';
