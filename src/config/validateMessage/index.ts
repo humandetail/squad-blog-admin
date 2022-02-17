@@ -8,3 +8,4 @@ export * from './resource/blogroll';
 export * from './resource/template';
 
 export * from './post/postCategory';
+export * from './post/postTag';
