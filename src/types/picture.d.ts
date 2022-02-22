@@ -15,5 +15,6 @@ export interface IPicture extends IBaseParams {
 
 export type SelectedPicture = {
   id: number;
+  name: string;
   url: string;
 }

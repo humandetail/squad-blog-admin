@@ -4,6 +4,7 @@
     title="图片选择器"
     width="960px"
     :footer="null"
+    :destroy-on-close="true"
     @cancel="$emit('close')">
     <a-spin :spinning="spinning">
       <a-tabs
@@ -105,8 +106,8 @@ const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
 
 const props = withDefaults(defineProps<{
   show: boolean;
-  tab: string;
   multiple: boolean;
+  tab?: string;
 }>(), {
   tab: ALL_PICTURES_CATEGORY_NAME,
   multiple: true
@@ -149,6 +150,11 @@ watch(() => props.tab, (tab) => {
   immediate: true
 });
 
+watch(() => props.show, () => {
+  activeKey.value = 0;
+  checkedKeys.value = [];
+}, { immediate: true });
+
 watch(activeKey, (key) => {
   getCurrentTabPictures(key);
 });
@@ -183,6 +189,7 @@ const handleChecked = (picId: number) => {
   }
   const selectedPic = {
     id: picId,
+    name: item.name,
     url: item.qiniuDomain + item.qiniuKey
   }
   emit('change', selectedPic);
@@ -192,6 +199,7 @@ const handleMultipleSelectFinished = () => {
   emit('change', currentCategoryPictures.value.filter(item => checkedKeys.value.includes(item.id)).map(item => {
     return {
       id: item.id,
+      name: item.name,
       url: item.qiniuDomain + item.qiniuKey
     }
   }));
