@@ -23,13 +23,13 @@ export function getPictureInfo (id: number) {
  */
 export function createPicture (data: IPicture) {
   const fd = new FormData();
-  fd.append('file', (data.file as any).originFileObj);
+  fd.append('file', data.file instanceof File ? data.file : (data.file as any).originFileObj);
   for (const [key, value] of Object.entries(data)) {
     if (key !== 'file') {
       fd.append(key, value);
     }
   }
-  return axiosPost<null>('/pictures', fd);
+  return axiosPost<IPictureItem>('/pictures', fd);
 }
 
 /**

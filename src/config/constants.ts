@@ -11,4 +11,9 @@ export enum EMenuType {
   '权限' = 2
 }
 
+export enum EBatchSelector {
+  all,
+  selected
+}
+
 export const ALL_PICTURES_CATEGORY_NAME = '全部图片';
