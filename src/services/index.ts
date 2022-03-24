@@ -10,3 +10,5 @@ export * from './resource/template';
 export * from './post/postCategory';
 export * from './post/postTag';
 export * from './post/post';
+
+export * from './website/setting';
