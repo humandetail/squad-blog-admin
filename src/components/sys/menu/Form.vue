@@ -53,7 +53,8 @@
             v-model:value="formState.router">
             <template #addonAfter>
               <a-button
-                type="success"
+                type="primary"
+                success
                 @click="handleGenerateRouter">
                 <setting-outlined />
                 生成路由

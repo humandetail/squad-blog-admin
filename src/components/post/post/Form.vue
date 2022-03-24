@@ -66,7 +66,8 @@
                 :url="previewItem.url"
               />
               <a-button
-                type="success"
+                type="primary"
+                success
                 @click="pictureSelectorVisible = true">
                 选择图片
               </a-button>

@@ -10,7 +10,8 @@
 
       <a-space>
         <a-button
-          type="success"
+          type="primary"
+          success
           :disabled="disabled"
           :loading="confirmLoading"
           @click="handleConfirm(1)">
