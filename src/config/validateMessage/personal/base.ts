@@ -1,8 +1,8 @@
 export const personalBaseMsg = {
   nickname: {
     required: '请输入昵称',
-    min: '文章分类名称不能少于2个字符',
-    max: '文章分类名称不能多于32个字符'
+    min: '昵称不能少于2个字符',
+    max: '昵称不能多于32个字符'
   },
   qq: {
     min: 'qq不能少于5个字符',

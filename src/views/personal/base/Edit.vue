@@ -4,7 +4,7 @@
       <PersonalBaseForm
         title="编辑基本信息"
         :confirm-loading="loading"
-        :form-data="personalBaseInfo"
+        :form-data="formData"
         :avatar-info="avatarInfo"
         @submit="handleSubmit"
       />
@@ -68,7 +68,7 @@ const avatarInfo = computed<SelectedPicture | undefined>(() => {
 
 const handleSubmit = async (data: IPersonalBase) => {
   await fetch(id, data);
-  success('基本编辑成功')
+  success('基本信息编辑成功')
   router.push({ name: '基本信息' });
 }
 </script>

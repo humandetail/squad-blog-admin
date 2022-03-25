@@ -28,3 +28,8 @@ export interface IPersonalBase extends IBaseParams {
   isShowWorks?: ZeroOrOneType;
   avatarId?: number;
 }
+
+export type SelectedPersonalBase = {
+  baseId: number;
+  baseNickname: string;
+}
