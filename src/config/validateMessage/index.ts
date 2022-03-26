@@ -15,3 +15,4 @@ export * from './website/setting';
 
 export * from './personal/base';
 export * from './personal/skill';
+export * from './personal/work';
