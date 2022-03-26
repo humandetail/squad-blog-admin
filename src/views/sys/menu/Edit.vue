@@ -21,7 +21,7 @@ import { success } from '@/utils/http';
 
 import MenuForm from '@/components/sys/menu/Form.vue';
 import { getQueryString } from '@/utils/tools';
-import { useFetchMenuInfo } from '@/hooks/menu';
+import { useFetchMenuInfo } from '@/hooks/sys/menu';
 import { editMenu } from '@/services/sys/menu';
 
 const router = useRouter();
@@ -36,6 +36,6 @@ const { loading, fetch } = useRequest<IBaseResponse<null>, [IMenuItem]>(editMenu
 const handleSubmit = async (data: IMenu) => {
   await fetch(({ id, ...data }) as IMenuItem);
   success('菜单编辑成功')
-  router.push({ name: '菜单列表' });
+  router.push({ name: '菜单管理' });
 }
 </script>

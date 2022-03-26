@@ -24,6 +24,6 @@ const { loading, fetch } = useRequest<IBaseResponse<null>, [IMenu]>(createMenu);
 const handleSubmit = async (data: IMenu) => {
   await fetch(data);
   success('菜单创建成功');
-  router.push({ name: '菜单列表' });
+  router.push({ name: '菜单管理' });
 }
 </script>

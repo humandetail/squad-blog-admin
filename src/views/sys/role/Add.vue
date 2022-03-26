@@ -25,6 +25,6 @@ const { loading, fetch } = useRequest<IBaseResponse<null>, [IRole]>(createRole);
 const handleSubmit = async (data: IRole) => {
   await fetch(data);
   success('角色创建成功');
-  router.push({ name: '角色列表' });
+  router.push({ name: '角色管理' });
 }
 </script>

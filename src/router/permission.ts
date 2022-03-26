@@ -2,6 +2,7 @@ import NProgress from 'nprogress';
 import _ from 'lodash';
 import router from './index';
 import { useUserStore } from '../store/user';
+import { useCommonStore } from '../store/common';
 import { generateDynamicRoutes } from './generateDynamicRoutes';
 import { getQueryString } from '@/utils/tools';
 
@@ -9,7 +10,7 @@ NProgress.configure({
   showSpinner: false
 });
 
-const whiteList = ['/login'];
+const whiteList = ['/login', '/exception/503'];
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
@@ -23,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
       // 无 token 直接跳回首页
       next({ path: 'login', query: { redirect: to.fullPath } })
     } else {
-      if (_.isEmpty(userStore.userInfo) || _.isEmpty(userStore.menus)) {
+      if (!userStore.userInfo || !userStore.menus || _.isEmpty(userStore.userInfo) || _.isEmpty(userStore.menus)) {
         try {
           await Promise.all([
             userStore.setUserInfo(),
@@ -50,6 +51,15 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-router.afterEach(() => {
+router.afterEach((to) => {
+  // 收集菜单链
+  const commonStore = useCommonStore();
+  commonStore.setMenuChains({
+    id: to.meta.id as number,
+    parentId: to.meta.parentId as number,
+    title: to.meta.title as string,
+    icon: to.meta.icon as string,
+    router: to.path
+  })
   NProgress.done();
 });

@@ -1,11 +1,11 @@
+import { RouteRecordRaw } from 'vue-router';
 import { TOKEN } from '@/config/constants';
-import router from '@/router';
-import { getMenus, getUserInfo, logout } from '@/services';
+import { getAllowMenus, getUserInfo, logout } from '@/services';
 import { IMenuItem } from '@/types/menu';
 import { IUserInfo } from '@/types/user';
 import { error } from '@/utils/http';
 import { defineStore } from 'pinia';
-import { RouteRecordRaw } from 'vue-router';
+import router from '../router';
 
 interface IUserState {
   token: string;
@@ -40,18 +40,20 @@ export const useUserStore = defineStore('user', {
         this.userInfo = res.data;
       } catch (err: any) {
         error(err.message);
+        router.push('/login');
       }
     },
 
     async setMenus () {
       try {
-        const res = await getMenus({ isAll: 1 });
+        const res = await getAllowMenus();
         if (res.code !== 200) {
           throw res;
         }
         this.menus = res.data.records;
       } catch (err: any) {
         error(err.message);
+        router.push('/login');
       }
     },
 
@@ -65,7 +67,12 @@ export const useUserStore = defineStore('user', {
           await logout();
         }
       } finally {
+        // 清空所有数据
         this.setToken('');
+        this.menus = [];
+        this.userInfo = null;
+        this.routes = [];
+
         router.push('/login');
       }
     }

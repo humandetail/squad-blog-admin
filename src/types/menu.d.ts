@@ -43,3 +43,11 @@ export interface IMenuInfo extends IBaseResponse {
   icon: string;
   isCache: number;
 }
+
+export interface IMenuChain {
+  id: number;
+  parentId: number;
+  title: string;
+  router: string;
+  icon: string;
+}

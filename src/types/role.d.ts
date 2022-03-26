@@ -2,6 +2,7 @@ import { IBasePageParams, IBaseParams, IBaseResponseItem } from './common';
 import { IMenuItem } from './menu';
 
 export interface IRole extends IBaseParams {
+  id?: number;
   name: string;
   remarks: string;
 }

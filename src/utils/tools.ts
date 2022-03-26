@@ -3,7 +3,7 @@ import publicKey from '@/config/publicKey';
 import { LocationQuery } from 'vue-router';
 import _ from 'lodash';
 import { customAlphabet } from 'nanoid';
-import { RecordType } from '@/types/common';
+import { IOperationButtonProps, RecordType, ZeroOrOneType } from '@/types/common';
 
 export const encryptPassword = (plain: string) => {
   const enc = new JSEncrypt();
@@ -66,4 +66,17 @@ export const formatTreeData = <T extends RecordType & { children?: T[] }>(
     }
     return _.get(parent, pId) === defaultPId;
   });
+}
+
+export const getIsShowOperation = (
+  { id, isShow }: { id: number; isShow: ZeroOrOneType } & Record<any, any>,
+  callback: () => void
+): IOperationButtonProps => {
+  const op: IOperationButtonProps = {
+    text: isShow ? '隐藏' : '显示',
+    type: isShow ? 'primary' : 'success',
+    handler: callback
+  }
+
+  return op;
 }

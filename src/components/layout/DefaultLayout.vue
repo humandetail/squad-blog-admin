@@ -7,18 +7,25 @@
     <a-layout-header>
       <CommonHeader />
     </a-layout-header>
-    <a-layout-content>
-      <router-view v-slot="{ Component, route }">
-        <transition :name="route.meta.fade || 'fade'" mode="out-in">
-          <keep-alive>
+    <router-view v-slot="{ Component, route }">
+      <transition :name="route.meta.fade || 'fade'" mode="out-in">
+        <a-layout-content>
+          <CommonBreadcrumb />
+
+          <keep-alive v-if="route.meta.keepAlive">
             <component
               :is="Component"
               :key="route.fullPath"
             />
           </keep-alive>
-        </transition>
-      </router-view>
-    </a-layout-content>
+          <component
+            v-else
+            :is="Component"
+            :key="route.fullPath"
+          />
+        </a-layout-content>
+      </transition>
+    </router-view>
   </a-layout>
 </a-layout>
 </template>
@@ -26,11 +33,12 @@
 <script setup lang="ts">
 import CommonHeader from '@components/common/header/index.vue';
 import CommonAside from '@components/common/aside/index.vue';
+import CommonBreadcrumb from '../common/Breadcrumb.vue';
 </script>
 
 <style lang="less" scoped>
 .ant-layout {
-  height: 100%;
+  min-height: 100%;
 
   .ant-layout-header {
     padding: 16px;
@@ -42,6 +50,10 @@ import CommonAside from '@components/common/aside/index.vue';
 
     & > [class^="page-"] {
       height: 100%;
+    }
+
+    .ant-breadcrumb {
+      margin-bottom: 16px;
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <a-menu
     v-model:openKeys="openKeys"
+    v-model:selected-keys="selectedKeys"
     mode="inline"
     @click="handleClick">
     <template v-for="route in routes" :key="route.name">
@@ -20,20 +21,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/user';
 import { formatTreeData } from '@/utils/tools';
 import SubMenu from './SubMenu.vue';
 import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
+import { useCommonStore } from '@/store/common';
 
-const openKeys = ref([]);
+const openKeys = ref<string[]>([]);
+const selectedKeys = ref<string[]>([]);
 const userStore = useUserStore();
 const router = useRouter();
+const commonStore = useCommonStore();
 
 const routes = computed(() => {
   return formatTreeData(userStore.routes.filter(route => !route.meta?.hidden), 'meta.id', 'meta.parentId');
 });
+
+const menuChains = computed(() => commonStore.menuChains);
+
+watch(() => menuChains, (chains) => {
+  const len = chains.value.length;
+  if (len === 1) {
+    selectedKeys.value = [chains.value[0].title];
+  } else if (len > 1) {
+    openKeys.value = [chains.value[0].title];
+    selectedKeys.value = [chains.value[1].title];
+  }
+}, { immediate: true, deep: true });
 
 const handleClick = ({ keyPath }: MenuInfo) => {
   if (!keyPath) return;

@@ -60,7 +60,7 @@ import { ref, watch } from 'vue';
 
 import FormPageCard from '@/components/common/card/FormPageCard.vue';
 import { useFormRef } from '@/hooks/common';
-import { userMsg } from '@/utils/validateMessage';
+import { roleMsg } from '@/config/validateMessage';
 import { IRole } from '@/types/role';
 
 const props = withDefaults(defineProps<{
@@ -93,7 +93,7 @@ const layout = {
 
 const rules = {
   name: [
-    { required: true, message: userMsg.username.required, trigger: 'blur' }
+    { required: true, message: roleMsg.name.required, trigger: 'blur' }
   ]
 };
 

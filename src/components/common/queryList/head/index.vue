@@ -3,7 +3,7 @@
     <div class="search-wrapper">
       <template v-if="showSearch && searchVisible">
         <slot name="search">
-          <InputSearch />
+          <InputSearch @search="$emit('search', $event)" />
         </slot>
       </template>
     </div>
@@ -18,6 +18,7 @@
         :size="size"
         :columns="columns"
         :selected-column-keys="selectedColumnKeys"
+        :is-table="isTable"
         @update:size="$emit('update:size', $event)"
         @update:selected-column-keys="$emit('update:selected-column-keys', $event)"
         @refresh="$emit('refresh')"
@@ -37,10 +38,12 @@ withDefaults(defineProps<{
   size: ESize;
   columns: Record<string, any>[]
   selectedColumnKeys: string[],
-  showSearch: boolean
+  showSearch: boolean,
+  isTable: boolean;
 }>(), {
   size: ESize.default,
-  showSearch: true
+  showSearch: true,
+  isTable: true
 });
 
 // eslint-disable-next-line func-call-spacing
@@ -48,6 +51,7 @@ defineEmits<{
   (e: 'refresh'): void;
   (e: 'update:size', size: ESize): void;
   (e: 'update:selected-column-keys', columns: string[]): void;
+  (e: 'search', keyword: string): void
 }>();
 
 const searchVisible = ref(true);

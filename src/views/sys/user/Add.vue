@@ -16,7 +16,6 @@ import { useRequest } from '@/hooks/common';
 import { IBaseResponse } from '@/types/common';
 import { registerUser } from '@/services';
 import { encryptPassword } from '@/utils/tools';
-import { passwordReg } from '@/utils/regexp';
 
 const router = useRouter();
 
@@ -28,6 +27,6 @@ const handleRegister = async ({ username, password }: RegisterUserType) => {
     password: encryptPassword(password)
   });
   success('注册成功');
-  router.push({ name: '用户列表' });
+  router.push({ name: '用户管理' });
 }
 </script>

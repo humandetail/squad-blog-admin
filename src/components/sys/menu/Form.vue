@@ -53,7 +53,8 @@
             v-model:value="formState.router">
             <template #addonAfter>
               <a-button
-                type="success"
+                type="primary"
+                success
                 @click="handleGenerateRouter">
                 <setting-outlined />
                 生成路由
@@ -126,6 +127,7 @@ import { permissionReg } from '@/utils/regexp';
 import FormPageCard from '@/components/common/card/FormPageCard.vue';
 import FormOperations from '@/components/common/form/FormOperations.vue';
 import MenuSelect from './MenuSelect.vue';
+import { menuMsg } from '@/config/validateMessage';
 
 const props = withDefaults(defineProps<{
   title: string;
@@ -162,29 +164,22 @@ watch(() => props.formData, () => {
 const { formRef, resetFields } = useFormRef();
 
 const defaultRules = {
-  parentId: [{ required: true, type: 'number', message: '请选择上级菜单', trigger: 'change' }],
+  parentId: [{ required: true, type: 'number', message: menuMsg.parentId.required, trigger: 'change' }],
   name: [
-    { required: true, message: '请输入菜单名称', trigger: 'blur' },
-    { max: 32, message: '菜单名称不能超过32个字符', trigger: 'blur' }
+    { required: true, message: menuMsg.name.required, trigger: 'blur' },
+    { max: 32, message: menuMsg.name.max, trigger: 'blur' }
   ]
 }
 const rules = computed(() => {
   if (formState.value.type === 1) {
     return defaultRules;
-    // return formState.parentId === 0
-    //   ? defaultRules
-    //   : {
-    //       ...defaultRules,
-    //       router: [{ required: true, message: '请输入路由地址', trigger: 'blur' }],
-    //       path: [{ required: true, message: '请输入组件路径', trigger: 'blur' }]
-    //     }
   };
 
   return {
     ...defaultRules,
     permission: [
-      { required: true, message: '请输入操作权限代码', trigger: 'blur' },
-      { pattern: permissionReg, message: '请检测权限代码的格式', trigger: 'blur' }
+      { required: true, message: menuMsg.permission.required, trigger: 'blur' },
+      { pattern: permissionReg, message: menuMsg.permission.pattern, trigger: 'blur' }
     ]
   };
 });

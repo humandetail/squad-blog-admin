@@ -1,3 +1,4 @@
+export type ZeroOrOneType = 0 | 1;
 export interface IBaseResponse<T = any> {
   code: number;
   data: T;
@@ -16,7 +17,7 @@ export interface IBasePageResponse<T = any> extends IBaseResponse {
 export interface IBaseResponseItem {
   id: number;
   sort: number;
-  isShow: number;
+  isShow: ZeroOrOneType;
   operator: string;
   createdTime: string;
   updatedTime: string;
@@ -28,6 +29,7 @@ export interface IBaseParams {
 }
 
 export interface IBasePageParams {
+  keyword?: string;
   isShow?: number;
   current?: number;
   pageSize?: number;
@@ -53,5 +55,3 @@ export interface IOperationButtonProps {
   record?: any;
   popConfirm?: IPopConfirm;
 }
-
-export type ZeroOrOneType = 0 | 1;

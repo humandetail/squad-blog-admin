@@ -5,8 +5,10 @@
       :columns="nativeColumns"
       :loading="loading"
       :show-search="showSearch"
+      :is-table="isTable"
       v-model:selected-column-keys="selectedColumnKeys"
-      @refresh="$emit('refresh')">
+      @refresh="$emit('refresh')"
+      @search="$emit('search', $event)">
       <template #search>
         <slot name="search" />
       </template>
@@ -62,8 +64,7 @@ import { Table, TableProps } from 'ant-design-vue';
 import _ from 'lodash';
 import type { TablePaginationConfig } from 'ant-design-vue';
 import { ESize } from '@/config/constants';
-import { TableDataType } from '@/views/sys/menu/List.vue';
-import { useColumns } from '@/hooks/queryList';
+import { useColumns } from '@/hooks/common/queryList';
 
 import { QueryListHead, QueryListFoot } from './index';
 
@@ -88,7 +89,7 @@ const props = defineProps({
       total: 0,
       current: 1,
       pageSize: 10,
-      pageSizeOption: ['10', '20', '50', '100', '200']
+      pageSizeOptions: ['10', '20', '50', '100', '200']
     })
   },
   selectedRowKeys: {
@@ -106,9 +107,13 @@ const props = defineProps({
   showSearch: {
     type: Boolean,
     default: true
+  },
+  isTable: {
+    type: Boolean,
+    default: true
   }
 })
-const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys', 'expand']);
+const emit = defineEmits(['refresh', 'table-change', 'update:selected-row-keys', 'expand', 'search']);
 
 const isTreeData = computed(() => {
   return props.isTreeData || (props.dataSource as any[]).some(item => _.isArray(item.children));
@@ -123,7 +128,7 @@ const {
 
 const size = ref<ESize>(ESize.default);
 
-const handleTableChange: TableProps<TableDataType>['onChange'] = (pagination, filters, sorter, extra) => {
+const handleTableChange: TableProps<Record<any, any>>['onChange'] = (pagination, filters, sorter, extra) => {
   emit('table-change', pagination, filters, sorter, extra);
 }
 
@@ -134,5 +139,4 @@ const handlePaginationChange = (pagination: TablePaginationConfig) => {
 const handleExpand = (...args: any[]) => {
   emit('expand', ...args);
 }
-
 </script>
