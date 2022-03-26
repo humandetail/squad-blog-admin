@@ -1,10 +1,11 @@
-import { useRouter, RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 import { TOKEN } from '@/config/constants';
 import { getAllowMenus, getUserInfo, logout } from '@/services';
 import { IMenuItem } from '@/types/menu';
 import { IUserInfo } from '@/types/user';
 import { error } from '@/utils/http';
 import { defineStore } from 'pinia';
+import router from '../router';
 
 interface IUserState {
   token: string;
@@ -14,8 +15,6 @@ interface IUserState {
 }
 
 const token = localStorage.getItem(TOKEN) || '';
-
-const router = useRouter();
 
 export const useUserStore = defineStore('user', {
   state: () => (<IUserState>{
@@ -73,6 +72,7 @@ export const useUserStore = defineStore('user', {
         this.menus = [];
         this.userInfo = null;
         this.routes = [];
+
         router.push('/login');
       }
     }
