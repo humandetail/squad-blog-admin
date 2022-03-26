@@ -38,7 +38,7 @@ import CommonBreadcrumb from '../common/Breadcrumb.vue';
 
 <style lang="less" scoped>
 .ant-layout {
-  height: 100%;
+  min-height: 100%;
 
   .ant-layout-header {
     padding: 16px;

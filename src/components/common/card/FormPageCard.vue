@@ -1,5 +1,6 @@
 <template>
   <a-card
+    class="form-page-card"
     :title="title">
     <template #extra>
       <div class="operations">
@@ -51,6 +52,15 @@ const back = () => {
 .operations {
   > :not(:first-of-type) {
     margin-left: 16px;
+  }
+}
+
+.form-page-card {
+  :deep(.ant-card-head) {
+    position: sticky;
+    top: 0;
+    background-color: @card-background;
+    z-index: 1;
   }
 }
 </style>

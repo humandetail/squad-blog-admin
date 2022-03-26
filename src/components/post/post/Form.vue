@@ -7,7 +7,7 @@
     <a-spin :spinning="initLoading">
       <a-form
         ref="formRef"
-        class="role-form"
+        class="post-form"
         v-bind="layout"
         :model="formState"
         :rules="rules"
@@ -376,3 +376,13 @@ const handleTagChange = (id: number) => {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.post-form {
+  :deep(.milkdown-menu) {
+    position: sticky;
+    top: 50px; // card head;
+    z-index: 1;
+  }
+}
+</style>
