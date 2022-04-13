@@ -20,8 +20,8 @@ import { useRoute } from 'vue-router';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 
-import DefaultLayout from '@components/layout/DefaultLayout.vue';
-import PlainLayout from '@components/layout/PlainLayout.vue';
+import DefaultLayout from '@/components/layout/DefaultLayout.vue';
+import PlainLayout from '@/components/layout/PlainLayout.vue';
 
 // const DefaultLayout = defineAsyncComponent(() => import('@components/layout/DefaultLayout.vue'));
 // const PlainLayout = defineAsyncComponent(() => import('@components/layout/PlainLayout.vue'));

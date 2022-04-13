@@ -5,7 +5,7 @@ import { IRoleItem } from '@/types/role';
 import { showDashes } from '@/utils/tools';
 import { TableColumnType } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
-import { useQueryList } from '../queryList';
+import { useQueryList } from '../common/queryList';
 
 const useRoleList = ({
   handleDelete,

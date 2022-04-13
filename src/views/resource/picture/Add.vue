@@ -16,11 +16,11 @@ import { success } from '@/utils/http';
 import { useRouter } from 'vue-router';
 
 import PictureForm from '@/components/resource/picture/picture/form/index.vue';
-import { IPicture } from '@/types/picture';
+import { IPicture, IPictureItem } from '@/types/picture';
 
 const router = useRouter();
 
-const { loading, fetch } = useRequest<IBaseResponse<null>, [IPicture]>(createPicture);
+const { loading, fetch } = useRequest<IBaseResponse<IPictureItem>, [IPicture]>(createPicture);
 
 const handleSubmit = async (data: IPicture) => {
   await fetch(data);

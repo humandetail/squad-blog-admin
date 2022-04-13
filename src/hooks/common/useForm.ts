@@ -50,6 +50,7 @@ function useForm<T extends Props> (data: T, rules?: Props, handleSuccess?: (valu
   }
 
   return {
+    // @ts-ignore
     modelRef,
     resetFields,
     submit,

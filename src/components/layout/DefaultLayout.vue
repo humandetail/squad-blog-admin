@@ -31,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import CommonHeader from '@components/common/header/index.vue';
-import CommonAside from '@components/common/aside/index.vue';
+import CommonHeader from '@/components/common/header/index.vue';
+import CommonAside from '@/components/common/aside/index.vue';
 import CommonBreadcrumb from '../common/Breadcrumb.vue';
 </script>
 

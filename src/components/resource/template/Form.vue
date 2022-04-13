@@ -126,6 +126,7 @@ watch(() => props.formData, (data) => {
     // 填充预览图
     previewItem.value = {
       id: data.coverId,
+      name: '',
       url: data.coverPic
     };
   }
