@@ -30,12 +30,24 @@ export function generateDynamicRoutes (menus: IMenuItem[]): RouteRecordRaw[] {
 }
 
 const generator = (menus: IMenuItem[]): RouteRecordRaw[] => {
+  const pages = import.meta.globEager('../views/**/*.vue');
+
+  const resolveComponent = (path: string) => {
+    const importPage = pages[path ? `../views/${path}${/\.vue$/.test(path) ? '' : '.vue'}` : '../views/Home.vue'];
+
+    if (!importPage) {
+      throw new Error(`Unknown page ${path}. Is it located under Pages with a .vue extension?`);
+    }
+
+    return importPage.default;
+  }
+
   return menus.map(menu => {
     const { id, parentId, name, router, path, icon, isShow, isCache } = menu;
     const currentRoute: RouteRecordRaw = {
       path: router ? `/${router}` : '/', // 路由 path
       name: name, // 路由名称(唯一)
-      component: () => path ? import(`../views/${path}${/\.vue$/.test(path) ? '' : '.vue'}`) : import('../views/Home.vue'),
+      component: resolveComponent(path),
       meta: {
         id,
         parentId,
