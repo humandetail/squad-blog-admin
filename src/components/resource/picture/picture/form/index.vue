@@ -77,7 +77,7 @@ import { useFormRef } from '@/hooks/common';
 import { IPicture, IPictureItem } from '@/types/picture';
 import { pictureMsg } from '@/config/validateMessage';
 
-import CommonFormUpload from '@/components/common/Form/Upload.vue';
+import CommonFormUpload from '@/components/common/form/Upload.vue';
 import CategorySelector from '../CategorySelector.vue';
 import PicturePreview from './Preview.vue';
 
