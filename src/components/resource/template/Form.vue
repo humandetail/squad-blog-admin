@@ -85,7 +85,7 @@ import { useDefineAsyncComponent, useFormRef } from '@/hooks/common';
 import { ITemplate, ITemplateItem } from '@/types/template';
 import { templateMsg } from '@/config/validateMessage';
 
-import CommonFormUpload from '@/components/common/Form/Upload.vue';
+import CommonFormUpload from '@/components/common/form/Upload.vue';
 import PicturePreview from '@/components/resource/picture/picture/form/Preview.vue';
 import { SelectedPicture } from '@/types/picture';
 
