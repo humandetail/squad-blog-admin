@@ -19,13 +19,14 @@ import { defineComponent, ref, watch } from 'vue';
 import { Slice } from 'prosemirror-model';
 import options from './menu';
 import { imageBtnTool } from './imageBtnPlugin';
+import PictureSelectorModal from '@/components/resource/picture/picture/PictureSelectorModal.vue'
 
 import { SelectedPicture } from '@/types/picture';
-import { useDefineAsyncComponent } from '@/hooks/common';
+// import { useDefineAsyncComponent } from '@/hooks/common';
 
 const MilkEditor = defineComponent<{ value: string }>((props, { emit }) => {
 
-  const PictureSelectorModal = useDefineAsyncComponent('/components/resource/picture/picture/PictureSelectorModal.vue')
+  // const PictureSelectorModal = useDefineAsyncComponent('/components/resource/picture/picture/PictureSelectorModal.vue')
 
   const pictureSelectorVisible = ref(false);
 
