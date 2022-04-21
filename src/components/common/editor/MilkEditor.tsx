@@ -92,8 +92,11 @@ const MilkEditor = defineComponent<{ value: string }>((props, { emit }) => {
     pictureSelectorVisible.value = true;
   }
 
-  const handleSelectorChange = ({ name, url }: SelectedPicture) => {
-    insertMarkdown(`![${name}](${url})`);
+  const handleSelectorChange = (item: SelectedPicture | SelectedPicture[]) => {
+    if (Array.isArray(item)) {
+      return;
+    }
+    insertMarkdown(`![${item.name}](${item.url})`);
     pictureSelectorVisible.value = false;
   }
 
