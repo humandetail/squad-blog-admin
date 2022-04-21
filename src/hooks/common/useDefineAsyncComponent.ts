@@ -2,6 +2,12 @@ import { defineAsyncComponent, defineComponent } from 'vue';
 import GlobalLoadingComponent from '@/components/common/GlobalLoadingComponent.vue';
 import { Modal } from 'ant-design-vue';
 
+const resolveComponent = (path: string) => {
+  const components = import.meta.glob('../../**/*.vue');
+
+  return components[`../..${path}`]
+}
+
 /**
  * 定义异步组件
  * @param { string } filePath - 以`/src`目录为基准的绝对路径
@@ -13,7 +19,7 @@ const useDefineAsyncComponent = (filePath: string) => {
 
   return defineAsyncComponent({
     // 工厂函数
-    loader: () => import(`../..${filePath}`),
+    loader: resolveComponent(filePath),
     // 加载异步组件时要使用的组件
     loadingComponent: GlobalLoadingComponent,
     // 加载失败时要使用的组件
