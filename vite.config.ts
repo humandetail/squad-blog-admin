@@ -5,7 +5,11 @@ import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default ({ mode }) => defineConfig({
+  // Failed to load module script: Expected a JavaScript module script but the server responded with a MIME type of "text/html".
+  // Strict MIME type checking is enforced for module scripts per HTML spec.
+  base: mode === 'production' ? '/' : './',
+
   plugins: [
     vue({
       // refTransform: true
@@ -35,8 +39,6 @@ export default defineConfig({
       '@types': resolve(__dirname, 'src/types')
     }
   },
-
-  base: './',
 
   server: {
     port: 3001,
