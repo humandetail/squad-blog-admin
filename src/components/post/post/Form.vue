@@ -147,9 +147,8 @@
               labelAlign="left"
               :labelCol="{ span: 24 }"
               :wrapperCol="{ span: 24 }">
-              <MilkdownEditor
-                :value="defaultEditorValue"
-                @update:value="formState.content = $event"
+              <SquadEditor
+                v-model:value="formState.content"
               />
             </a-form-item>
           </a-col>
@@ -184,10 +183,9 @@ import { IPost } from '@/types/post';
 import { postMsg } from '@/config/validateMessage';
 import { usePostFormInit } from '@/hooks/post/post';
 import TemplateSelector from '@/components/resource/template/TemplateSelector.vue';
-// import PictureSelectorModal from '@/components/resource/picture/picture/PictureSelectorModal.vue';
 import { SelectedPicture } from '@/types/picture';
 import Picturereview from '@/components/resource/picture/picture/form/Preview.vue';
-import MilkdownEditor from '@/components/common/editor/MilkEditor';
+import SquadEditor from '@/components/common/editor/SquadEditor.vue';
 
 const props = withDefaults(defineProps<{
   title: string;
@@ -227,8 +225,6 @@ watch(() => props.coverInfo, (info) => {
     previewItem.value = info;
   }
 });
-
-const defaultEditorValue = computed(() => props.formData.content || '')
 
 const {
   initLoading,
