@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
+import './components/common/editor/useWorker'
 import './router/permission';
 
 import 'nprogress/nprogress.css';

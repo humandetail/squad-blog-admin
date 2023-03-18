@@ -147,9 +147,8 @@
               labelAlign="left"
               :labelCol="{ span: 24 }"
               :wrapperCol="{ span: 24 }">
-              <MilkdownEditor
-                :value="defaultEditorValue"
-                @update:value="formState.content = $event"
+              <SquadEditor
+                v-model:value="formState.content"
               />
             </a-form-item>
           </a-col>
@@ -187,7 +186,7 @@ import TemplateSelector from '@/components/resource/template/TemplateSelector.vu
 // import PictureSelectorModal from '@/components/resource/picture/picture/PictureSelectorModal.vue';
 import { SelectedPicture } from '@/types/picture';
 import Picturereview from '@/components/resource/picture/picture/form/Preview.vue';
-import MilkdownEditor from '@/components/common/editor/MilkEditor';
+import SquadEditor from '@/components/common/editor/index.vue'
 
 const props = withDefaults(defineProps<{
   title: string;
