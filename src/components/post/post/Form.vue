@@ -183,7 +183,6 @@ import { IPost } from '@/types/post';
 import { postMsg } from '@/config/validateMessage';
 import { usePostFormInit } from '@/hooks/post/post';
 import TemplateSelector from '@/components/resource/template/TemplateSelector.vue';
-// import PictureSelectorModal from '@/components/resource/picture/picture/PictureSelectorModal.vue';
 import { SelectedPicture } from '@/types/picture';
 import Picturereview from '@/components/resource/picture/picture/form/Preview.vue';
 import SquadEditor from '@/components/common/editor/index.vue'
@@ -226,8 +225,6 @@ watch(() => props.coverInfo, (info) => {
     previewItem.value = info;
   }
 });
-
-const defaultEditorValue = computed(() => props.formData.content || '')
 
 const {
   initLoading,
