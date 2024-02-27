@@ -12,6 +12,8 @@ parserOptions:
   ecmaVersion: latest
   sourceType: module
   extraFileExtensions: ['.vue']
+ignorePatterns:
+  - components.d.ts
 plugins:
   - vue
 rules: {
@@ -20,5 +22,7 @@ rules: {
   '@typescript-eslint/no-non-null-assertion': 0,
   '@typescript-eslint/triple-slash-reference': 0,
   '@typescript-eslint/consistent-type-assertions': 0,
-  '@typescript-eslint/strict-boolean-expressions': 0
+  '@typescript-eslint/strict-boolean-expressions': 0,
+  '@typescript-eslint/explicit-function-return-type': 0,
+  '@typescript-eslint/promise-function-async': 0
 }
