@@ -15,7 +15,7 @@ export interface UserInfo extends Omit<BaseResponseItem, 'id'> {
   username: string
   isLock: number
   lastLogin: string
-  nickName: string
+  nickname: string
   avatarPic: string
   roleId: number
   roleName: string

@@ -60,6 +60,7 @@ export const useCommonStore = defineStore('common', () => {
       : ThemeMode.dark
 
     localStorage.setItem('HUMANDETAIL_THEME', themeMode.value)
+    document.documentElement.setAttribute('data-theme', themeMode.value)
   }
 
   return {
