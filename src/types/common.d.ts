@@ -1,3 +1,5 @@
+import type { FormItemProps } from 'ant-design-vue'
+
 export type ZeroOrOneType = 0 | 1
 
 export type Noop = (...args: any[]) => void
@@ -57,4 +59,22 @@ export interface OperationButtonProps {
   handler?: Noop
   record?: any
   popConfirm?: PopConfirm
+}
+
+export interface Col {
+  span?: number
+  offset?: number
+  xs?: Col
+  sm?: Col
+  md?: Col
+  lg?: Col
+  xl?: Col
+  xxl?: Col
+}
+
+export interface FormItem extends FormItemProps {
+  type: string
+  customRender?: string
+  on?: Record<string, (ev: any) => unknown>
+  [K: PropertyKey]: any
 }

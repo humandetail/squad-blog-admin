@@ -30,10 +30,11 @@ export function generateDynamicRoutes (menus: MenuItem[]): RouteRecordRaw[] {
 }
 
 const generator = (menus: MenuItem[]): RouteRecordRaw[] => {
-  const pages = (import.meta as any).globEager('../pages/**/*.vue')
+  console.log(import.meta)
+  const pages = (import.meta as any).glob('../pages/**/*.vue')
 
   const resolveComponent = (path: string) => {
-    const importPage = pages[path ? `../pages/${path}${/\.vue$/.test(path) ? '' : '.vue'}` : '../views/Home.vue']
+    const importPage = pages[path ? `../pages/${path}${/\.vue$/.test(path) ? '' : '.vue'}` : '../pages/home/index.vue']
 
     if (!importPage) {
       throw new Error(`Unknown page ${path}. Is it located under Pages with a .vue extension?`)

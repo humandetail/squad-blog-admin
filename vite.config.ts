@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
         }
       }),
       Components({
+        directoryAsNamespace: true,
         resolvers: [
           AntDesignVueResolver({
             resolveIcons: true,
@@ -41,6 +42,15 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src')
+      }
+    },
+
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:7001', // dev
+          changeOrigin: true
+        }
       }
     }
   }

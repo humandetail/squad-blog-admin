@@ -75,6 +75,7 @@ export const useUserStore = defineStore('user', () => {
     menus,
     routes,
 
+    setToken,
     setMenus,
     setUserInfo,
     setRoutes,

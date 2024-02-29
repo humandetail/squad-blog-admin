@@ -13,7 +13,6 @@ NProgress.configure({
 const whiteList = ['/login', '/exception/503']
 
 router.beforeEach(async (to, from, next) => {
-  console.log(to, from)
   NProgress.start()
   if (whiteList.includes(to.path)) {
     // 白名单直接放行
@@ -22,7 +21,7 @@ router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore()
     const token = userStore.token
     if (!token) {
-      // 无 token 直接跳回首页
+      // 无 token 直接跳回登录页面
       next({ path: 'login', query: { redirect: to.fullPath } })
     } else {
       if (!userStore.userInfo || !userStore.menus || _.isEmpty(userStore.userInfo) || _.isEmpty(userStore.menus)) {
