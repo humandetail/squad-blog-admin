@@ -19,9 +19,9 @@ export function generateDynamicRoutes (menus: MenuItem[]): RouteRecordRaw[] {
     },
     ...generator(menus.filter(menu => menu.type === 1)),
     {
-      path: '/:pathMatch(.*)*',
+      path: '/:pathMatch(.*)',
       name: 'NotFound',
-      redirect: '/expection/404',
+      redirect: '/exception/404',
       meta: {
         hidden: true
       }
@@ -30,7 +30,6 @@ export function generateDynamicRoutes (menus: MenuItem[]): RouteRecordRaw[] {
 }
 
 const generator = (menus: MenuItem[]): RouteRecordRaw[] => {
-  console.log(import.meta)
   const pages = (import.meta as any).glob('../pages/**/*.vue')
 
   const resolveComponent = (path: string) => {
@@ -39,8 +38,7 @@ const generator = (menus: MenuItem[]): RouteRecordRaw[] => {
     if (!importPage) {
       throw new Error(`Unknown page ${path}. Is it located under Pages with a .vue extension?`)
     }
-
-    return importPage.default
+    return importPage
   }
 
   return menus.map(menu => {
