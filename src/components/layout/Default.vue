@@ -12,6 +12,8 @@
       <router-view v-slot="{ Component, route }">
         <transition>
           <a-layout-content>
+            <common-breadcrumb />
+
             <keep-alive v-if="route.meta.keepAlive">
               <component
                 :is="Component"

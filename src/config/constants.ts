@@ -25,6 +25,7 @@ export enum WebsiteStatus {
   '正常状态',
   '升级维护',
   '网站已关闭',
+  '置灰状态'
 }
 
 export const ALL_PICTURES_CATEGORY_NAME = '全部图片'

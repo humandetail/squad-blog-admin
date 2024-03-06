@@ -31,7 +31,7 @@
               allow-clear
               :placeholder="`请${formItem.type === 'select' ? '选择' : '填写'}${formItem.label ?? ''}`"
               v-bind="(formItem as any)"
-              v-on="formItem.on"
+              v-on="formItem.on ?? {}"
               v-model:value="modelRef[formItem.name as string]"
             />
           </slot>
@@ -39,7 +39,7 @@
         <a-form-item
           :wrapper-col="{
             span: wrapperCol.span,
-            offset: labelCol.offset
+            offset: labelCol.span
           }"
         >
           <slot
@@ -101,7 +101,7 @@ const emits = defineEmits<{
   (e: 'error', value: any): void
 }>()
 
-const modelRef = reactive<Record<string, any>>(
+const modelRef = ref<Record<string, any>>(
   {
     ...props.formItems.reduce((rules: Record<string, any>, item) => {
       rules[item.name as string] = item.value ?? item.initialValue
@@ -125,14 +125,17 @@ const errorInfos = computed(() => {
   return mergeValidateInfo(_.toArray(validateInfos))
 })
 
+watch(() => props.formData, val => {
+  modelRef.value = { ...val }
+}, { deep: true })
+
 const onSubmit = () => {
   validate()
     .then(async () => {
-      console.log(rulesRef)
       confirmLoading.value = true
 
       try {
-        const res = await props.submitHandler(toRaw(modelRef))
+        const res = await props.submitHandler(modelRef.value)
 
         if (res?.code !== 200) {
           throw res

@@ -10,7 +10,7 @@ export default (err: any) => {
         break
       case 401:
         error('登录过期，请重新登录')
-        useUserStore().logout()
+        useUserStore().doLogout()
         break
       case 403:
         error('服务拒绝访问')
