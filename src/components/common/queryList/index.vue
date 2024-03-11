@@ -3,14 +3,22 @@
     <slot name="header">
       <common-query-list-header
         :show-search="showSearch"
-        :keyword="keyword"
         :loading="loading"
         :columns="nativeColumns"
         :is-table="isTable"
         v-model:size="size"
         v-model:selected-column-keys="selectedColumnKeys"
-        @search="emits('search', $event)"
-      />
+        @search="emits('search', { keyword: $event })"
+        @refresh="emits('search')"
+      >
+        <template #search>
+          <slot name="search" />
+        </template>
+
+        <template #custom-operations>
+          <slot name="custom-operations" />
+        </template>
+      </common-query-list-header>
     </slot>
 
     <slot name="table">
@@ -23,6 +31,7 @@
         :row-selection="rowSelection"
         :scroll="{ x: 'max-content', scrollToFirstRowOnChange: true }"
         :pagination="false"
+        :transform-cell-text="transformCellText"
         @change="handleTableChange"
         @resize-column="handleResizeColumn"
         @expand="handleExpand"
@@ -70,7 +79,6 @@ const props = withDefaults(defineProps<{
   loading?: boolean
   showSearch?: boolean
   isTable?: boolean
-  keyword?: string
 }>(), {
   columns: () => [],
   dataSource: () => [],
@@ -85,7 +93,7 @@ const emits = defineEmits<{
   (e: 'update:selected-row-keys', value: Array<string | number>): void
   (e: 'table-change', pagination: TablePaginationConfig, filters?: Record<string, FilterValue | null>, sorter?: SorterResult<any> | Array<SorterResult<any>>, extra?: TableCurrentDataSource<any>): void
   (e: 'expand', expanded: boolean, record: any): void
-  (e: 'search', value: string): void
+  (e: 'search', value?: Record<string, any>): void
 }>()
 
 const size = ref(Size.default)
@@ -129,5 +137,19 @@ const handlePaginationChange = (pagination: TablePaginationConfig) => {
 
 const handleExpand: TableProps['onExpand'] = (expended, record) => {
   emits('expand', expended, record)
+}
+
+const transformCellText = ({ text }: any) => {
+  const valueType = typeof text
+  if (
+    (valueType === 'number' && !_.isNaN(text)) ||
+    (valueType === 'string' && text) ||
+    !_.isEmpty(text) ||
+    text
+  ) {
+    return text
+  }
+
+  return '-'
 }
 </script>

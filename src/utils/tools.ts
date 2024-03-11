@@ -3,7 +3,7 @@ import publicKey from '@/config/publicKey'
 import { type LocationQuery } from 'vue-router'
 import _ from 'lodash'
 import { customAlphabet } from 'nanoid'
-import type { OperationButtonProps, RecordType, ZeroOrOneType } from '@/types/common'
+import type { RecordType } from '@/types/common'
 
 export const encryptPassword = (plain: string) => {
   const enc = new JSEncrypt()
@@ -29,20 +29,6 @@ export const getNanoId = (size = 20, alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcde
   return nanoid()
 }
 
-export const showDashes = (value: any) => {
-  const valueType = typeof value
-  if (
-    (valueType === 'number' && !_.isNaN(value)) ||
-    (valueType === 'string' && value) ||
-    !_.isEmpty(value) ||
-    value
-  ) {
-    return value
-  }
-
-  return '-'
-}
-
 export const str2UpperCamelCase = (str: string) => {
   const camelCaseStr = _.camelCase(str)
 
@@ -66,17 +52,4 @@ export const formatTreeData = <T extends RecordType & { children?: T[] }>(
     }
     return _.get(parent, pId) === defaultPId
   })
-}
-
-export const getIsShowOperation = (
-  { isShow }: { isShow: ZeroOrOneType } & Record<any, any>,
-  callback: () => void
-): OperationButtonProps => {
-  const op: OperationButtonProps = {
-    text: isShow ? '隐藏' : '显示',
-    type: isShow ? 'primary' : 'success',
-    handler: callback
-  }
-
-  return op
 }

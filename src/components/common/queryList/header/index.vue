@@ -7,10 +7,11 @@
             :value="localKeyword"
             :loading="loading"
             enter-button
+            allow-clear
             placeholder="按「回车」进行搜索"
             @update:value="handleKeywordChange"
             @search="handleSearch"
-          ></a-input-search>
+          />
         </slot>
       </template>
     </div>
@@ -25,9 +26,9 @@
         :columns="columns"
         :selected-column-keys="selectedColumnKeys"
         :is-table="isTable"
-        @update:size="$emit('update:size', $event)"
-        @update:selected-column-keys="$emit('update:selected-column-keys', $event)"
-        @refresh="$emit('refresh')"
+        @update:size="emits('update:size', $event)"
+        @update:selected-column-keys="emits('update:selected-column-keys', $event)"
+        @refresh="emits('refresh')"
       />
     </div>
   </header>

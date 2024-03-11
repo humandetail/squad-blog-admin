@@ -1,5 +1,3 @@
-import { showDashes } from '@/utils/tools'
-
 type Key = 'isShow' | 'sort' | 'operator' | 'createdTime' | 'updatedTime'
 
 enum titleMap {
@@ -26,12 +24,7 @@ export default (keys: Key[] = ['isShow', 'sort', 'operator', 'createdTime', 'upd
       width: widthMap[key],
       ellipsis: true,
       resizable: true,
-      sorter: true,
-      ...(key === 'isShow'
-        ? null
-        : {
-            customRender: ({ text }: any) => showDashes(text)
-          })
+      sorter: true
     }
   })
 }

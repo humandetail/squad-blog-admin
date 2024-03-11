@@ -127,7 +127,6 @@ onMounted(async () => {
     }
   } = res
 
-  console.log(res)
   if (logoId && logoPic) {
     previewItem.value = {
       id: logoId,

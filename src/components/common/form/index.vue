@@ -27,6 +27,19 @@
             :model-ref="modelRef"
           >
             <component
+              v-if="formItem.type === 'switch'"
+              :is="`a-${formItem.type}`"
+              allow-clear
+              :checked-value="1"
+              checked-children="是"
+              :un-checked-value="0"
+              un-checked-children="否"
+              v-bind="(formItem as any)"
+              v-on="formItem.on ?? {}"
+              v-model:checked="modelRef[formItem.name as number]"
+            />
+            <component
+              v-else
               :is="`a-${formItem.type}`"
               allow-clear
               :placeholder="`请${formItem.type === 'select' ? '选择' : '填写'}${formItem.label ?? ''}`"
@@ -159,6 +172,7 @@ defineExpose({
   errorInfos,
   confirmLoading,
   resetFields,
+  submit: onSubmit,
   validate
 })
 </script>

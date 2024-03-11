@@ -6,7 +6,7 @@
     >
       <a-button
         :loading="loading"
-        @click="$emit('refresh')"
+        @click="emits('refresh')"
       >
         <template #icon>
           <reload-outlined />
@@ -18,7 +18,7 @@
       :placement="placement"
       :title="`${!searchVisible ? '显示' : '隐藏'}搜索区域`"
     >
-      <a-button @click="$emit('update:search-visible', !searchVisible)">
+      <a-button @click="emits('update:search-visible', !searchVisible)">
         <template #icon>
           <SearchOutlined />
         </template>
@@ -119,7 +119,7 @@ const props = withDefaults(defineProps<{
   isTable: true
 })
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   (e: 'refresh'): void
   (e: 'update:search-visible', value: boolean): void
   (e: 'update:size', size: Size): void
@@ -129,7 +129,7 @@ const emit = defineEmits<{
 const sizeDropdownVisible = ref(false)
 
 const handleSizeMenuClick = (e: MenuInfo) => {
-  emit('update:size', e.key as Size)
+  emits('update:size', e.key as Size)
 }
 
 const columnDropdownVisible = ref(false)
@@ -141,7 +141,7 @@ const handleOptionMenuClick = (e: MenuInfo) => {
     ? keys.filter(key => key !== e.key as any)
     : [...keys, e.key as string]
 
-  emit('update:selected-column-keys', results)
+  emits('update:selected-column-keys', results)
 }
 
 const placement = 'top'
