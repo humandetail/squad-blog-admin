@@ -69,6 +69,7 @@ declare module 'vue' {
     PieChartOutlined: typeof import('@ant-design/icons-vue')['PieChartOutlined']
     PlusOutlined: typeof import('@ant-design/icons-vue')['PlusOutlined']
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']
+    ResourceBlogrollForm: typeof import('./src/components/resource/blogroll/Form.vue')['default']
     ResourcePictureCategoryForm: typeof import('./src/components/resource/picture/CategoryForm.vue')['default']
     ResourcePictureCategorySelector: typeof import('./src/components/resource/picture/CategorySelector.vue')['default']
     ResourcePicturePictureForm: typeof import('./src/components/resource/picture/PictureForm.vue')['default']
