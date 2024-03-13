@@ -73,7 +73,7 @@ export function getPictureInfo (id: number) {
 /**
  * 新增图片
  */
-export function createPicture (data: Picture) {
+export function createPicture (data: Omit<Picture, 'fileList'> & { file: File }) {
   const fd = new FormData()
   fd.append(
     'file',
@@ -86,13 +86,18 @@ export function createPicture (data: Picture) {
       fd.append(key, value as string | Blob)
     }
   }
-  return axiosPost<PictureItem>('/pictures', fd)
+
+  return axiosPost<PictureItem>('/pictures', fd, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 }
 
 /**
  * 修改图片信息
  */
-export function editPicture (id: number, data: Picture) {
+export function editPicture (id: number, data: Omit<Picture, 'fileList'> & { file: File }) {
   const fd = new FormData()
   if (data.file) {
     fd.append('file', (data.file as any).originFileObj as Blob)
@@ -102,7 +107,11 @@ export function editPicture (id: number, data: Picture) {
       fd.append(key, value as string | Blob)
     }
   }
-  return axiosPut<null>(`/pictures/${id}`, fd)
+  return axiosPut<null>(`/pictures/${id}`, fd, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 }
 
 /**

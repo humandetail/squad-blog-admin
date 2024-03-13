@@ -1,3 +1,4 @@
+import { type UploadProps } from 'ant-design-vue'
 import type { BaseParams, BaseResponseItem } from './common'
 
 export interface PictureItem extends BaseResponseItem {
@@ -10,7 +11,7 @@ export interface PictureItem extends BaseResponseItem {
 export interface Picture extends BaseParams {
   name: string
   categoryId: number
-  file: File | null
+  fileList: Required<UploadProps>['fileList']
 }
 
 export interface SelectedPicture {
