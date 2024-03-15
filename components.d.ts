@@ -33,6 +33,7 @@ declare module 'vue' {
     AModal: typeof import('ant-design-vue/es')['Modal']
     APagination: typeof import('ant-design-vue/es')['Pagination']
     APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
+    ARadio: typeof import('ant-design-vue/es')['Radio']
     ArrowLeftOutlined: typeof import('@ant-design/icons-vue')['ArrowLeftOutlined']
     ASelect: typeof import('ant-design-vue/es')['Select']
     ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
@@ -87,6 +88,7 @@ declare module 'vue' {
     SyncOutlined: typeof import('@ant-design/icons-vue')['SyncOutlined']
     SysRoleAuthorizationModal: typeof import('./src/components/sys/role/AuthorizationModal.vue')['default']
     SysRoleForm: typeof import('./src/components/sys/role/Form.vue')['default']
+    SysUserSetRoleModal: typeof import('./src/components/sys/user/SetRoleModal.vue')['default']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']
   }
 }

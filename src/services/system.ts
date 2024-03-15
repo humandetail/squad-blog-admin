@@ -181,7 +181,7 @@ export function registerUser (data: RegisterUserType) {
  * @param data
  */
 export function userManage (id: string, { isLock, roleId }: UserManage) {
-  return axiosPut<null>(`/users/${id}/manage`, isLock ? { isLock } : { roleId })
+  return axiosPut<null>(`/users/${id}/manage`, isLock !== undefined ? { isLock } : { roleId })
 }
 
 /**
