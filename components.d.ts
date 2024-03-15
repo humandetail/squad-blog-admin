@@ -42,7 +42,9 @@ declare module 'vue' {
     ATable: typeof import('ant-design-vue/es')['Table']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    ATag: typeof import('ant-design-vue/es')['Tag']
     ATooltip: typeof import('ant-design-vue/es')['Tooltip']
+    ATree: typeof import('ant-design-vue/es')['Tree']
     AUpload: typeof import('ant-design-vue/es')['Upload']
     ColumnHeightOutlined: typeof import('@ant-design/icons-vue')['ColumnHeightOutlined']
     CommonAside: typeof import('./src/components/common/aside/index.vue')['default']
@@ -83,6 +85,8 @@ declare module 'vue' {
     SearchOutlined: typeof import('@ant-design/icons-vue')['SearchOutlined']
     SettingOutlined: typeof import('@ant-design/icons-vue')['SettingOutlined']
     SyncOutlined: typeof import('@ant-design/icons-vue')['SyncOutlined']
+    SysRoleAuthorizationModal: typeof import('./src/components/sys/role/AuthorizationModal.vue')['default']
+    SysRoleForm: typeof import('./src/components/sys/role/Form.vue')['default']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']
   }
 }
