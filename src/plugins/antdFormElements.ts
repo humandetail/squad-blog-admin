@@ -17,7 +17,8 @@ import {
   Checkbox,
   Cascader,
   InputPassword,
-  Textarea
+  Textarea,
+  RadioGroup
 } from 'ant-design-vue'
 
 const elements = [
@@ -38,7 +39,8 @@ const elements = [
   DatePicker,
   Checkbox,
   Cascader,
-  Textarea
+  Textarea,
+  RadioGroup
 ]
 
 const registerAntdFormElements: Plugin = (app) => {
