@@ -80,6 +80,7 @@ declare module 'vue' {
     PersonalWorkForm: typeof import('./src/components/personal/work/Form.vue')['default']
     PieChartOutlined: typeof import('@ant-design/icons-vue')['PieChartOutlined']
     PlusOutlined: typeof import('@ant-design/icons-vue')['PlusOutlined']
+    PostTagForm: typeof import('./src/components/post/tag/Form.vue')['default']
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']
     ResourceBlogrollForm: typeof import('./src/components/resource/blogroll/Form.vue')['default']
     ResourcePictureCategoryForm: typeof import('./src/components/resource/picture/CategoryForm.vue')['default']
