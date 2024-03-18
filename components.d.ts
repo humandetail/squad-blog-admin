@@ -71,6 +71,7 @@ declare module 'vue' {
     LayoutDefault: typeof import('./src/components/layout/Default.vue')['default']
     LayoutPlain: typeof import('./src/components/layout/Plain.vue')['default']
     LoginOutlined: typeof import('@ant-design/icons-vue')['LoginOutlined']
+    PersonalBaseForm: typeof import('./src/components/personal/base/Form.vue')['default']
     PieChartOutlined: typeof import('@ant-design/icons-vue')['PieChartOutlined']
     PlusOutlined: typeof import('@ant-design/icons-vue')['PlusOutlined']
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']

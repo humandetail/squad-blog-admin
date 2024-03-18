@@ -54,7 +54,6 @@ const validatePassword = (_rule: RuleObject, value: string) => {
 }
 
 const validatePassword2 = (_rule: RuleObject, value: string) => {
-  console.log(commonFormRef.value.modelRef)
   if (value !== commonFormRef.value.modelRef.password) {
     return Promise.reject(userMsg.password2.inconformity)
   }
