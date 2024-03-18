@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="visible"
+    :open="visible"
     width="80%"
     title="选择挂载点"
     :footer="null"
