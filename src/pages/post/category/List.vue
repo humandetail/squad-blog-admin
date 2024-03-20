@@ -66,7 +66,7 @@ import useDeleteItem from '@/composables/useDeleteItem'
 import useQueryList from '@/composables/useQueryList'
 import commonColumns from '@/config/commonColumns'
 import { deletePostCategory, getPostCategories, togglePostCategoryIsShow } from '@/services'
-import { type PictureCategoryItem } from '@/types/picture'
+import { type PostCategoryItem } from '@/types/post'
 import { type TableColumnType } from 'ant-design-vue'
 
 const router = useRouter()
@@ -92,7 +92,7 @@ const {
   }
 )
 
-const columns: Array<TableColumnType<PictureCategoryItem>> = [
+const columns: Array<TableColumnType<PostCategoryItem>> = [
   {
     title: '分类名称',
     dataIndex: 'name',
