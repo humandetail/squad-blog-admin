@@ -18,13 +18,13 @@ export function getUV (range: number) {
 }
 
 export function getTop10Keywords (range: number) {
-  return axiosGet<Top10KeywordItem>('/statistics/top10Keywords', {
+  return axiosGet<Top10KeywordItem[]>('/statistics/top10Keywords', {
     params: { range }
   })
 }
 
 export function getTop10PostViews (range: number) {
-  return axiosGet<Top10PostViewItem>('/statistics/top10PostViews', {
+  return axiosGet<Top10PostViewItem[]>('/statistics/top10PostViews', {
     params: { range }
   })
 }

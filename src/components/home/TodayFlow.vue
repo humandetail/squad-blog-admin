@@ -45,8 +45,8 @@ const { token } = theme.useToken()
 const { fetch, loading } = useRequest(getTodayFlow)
 
 const record = ref<TodayFlowItem>({
-  todayFlow: {},
-  yesterdayFlow: {}
+  todayFlow: { pv: 0, uv: 0, ip: 0 },
+  yesterdayFlow: { pv: 0, uv: 0, ip: 0 }
 })
 
 const data = computed(() => {

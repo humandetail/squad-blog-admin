@@ -51,6 +51,10 @@ watch(() => props.range, async range => {
 }, { immediate: true })
 
 const render = () => {
+  if (!containerRef.value) {
+    return
+  }
+
   chart = new Chart({
     container: containerRef.value,
     autoFit: true

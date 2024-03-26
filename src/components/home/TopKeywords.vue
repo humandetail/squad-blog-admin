@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<{
 
 const { fetch, loading } = useRequest(getTop10Keywords)
 
-const record = ref<Top10KeywordItem>({})
+const record = ref<Top10KeywordItem[]>([])
 
 let chart: Chart | null = null
 const containerRef = ref<HTMLElement | null>(null)
@@ -42,6 +42,10 @@ watch(() => props.range, async range => {
 }, { immediate: true })
 
 const render = () => {
+  if (!containerRef.value) {
+    return
+  }
+
   chart = new Chart({
     container: containerRef.value,
     autoFit: true

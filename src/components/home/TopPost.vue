@@ -34,7 +34,7 @@ const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE
 
 const { fetch, loading } = useRequest(getTop10PostViews)
 
-const record = ref<Top10PostViewItem>({})
+const record = ref<Top10PostViewItem[]>([])
 
 let chart: Chart | null = null
 const containerRef = ref<HTMLElement | null>(null)
@@ -50,6 +50,10 @@ watch(() => props.range, async range => {
 }, { immediate: true })
 
 const render = () => {
+  if (!containerRef.value) {
+    return
+  }
+
   chart = new Chart({
     container: containerRef.value,
     autoFit: true
