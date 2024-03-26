@@ -31,7 +31,7 @@ export const useUserStore = defineStore('user', () => {
       userInfo.value = res.data
     } catch (err: unknown) {
       error((err as Error)?.message)
-      router.push('/login')
+      doLogout()
     }
   }
 
@@ -45,7 +45,7 @@ export const useUserStore = defineStore('user', () => {
       menus.value = res.data.records
     } catch (err: unknown) {
       error((err as Error)?.message)
-      router.push('/login')
+      doLogout()
     }
   }
 

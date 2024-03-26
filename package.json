@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@antv/g2": "^5.1.16",
     "ant-design-vue": "4.x",
     "axios": "^1.6.7",
     "dayjs": "^1.11.10",
