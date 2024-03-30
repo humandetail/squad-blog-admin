@@ -4,6 +4,10 @@
       title="Top10关键字"
       :loading="loading"
     >
+      <a-empty
+        v-if="records.length === 0"
+        :image="simpleImage"
+      />
       <div
         ref="containerRef"
         class="container"
@@ -16,6 +20,7 @@
 import { Chart } from '@antv/g2'
 import useRequest from '@/composables/useRequest'
 import { getTop10Keywords } from '@/services'
+import { Empty } from 'ant-design-vue'
 
 import type { Top10KeywordItem } from '@/types/statistic'
 
@@ -25,20 +30,23 @@ const props = withDefaults(defineProps<{
   range: 1
 })
 
+const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE
+
 const { fetch, loading } = useRequest(getTop10Keywords)
 
-const record = ref<Top10KeywordItem[]>([])
+const records = ref<Top10KeywordItem[]>([])
 
 let chart: Chart | null = null
 const containerRef = ref<HTMLElement | null>(null)
 
 watch(() => props.range, async range => {
   const res = await fetch(range)
-  record.value = res.data
+  records.value = res.data
 
-  await nextTick()
-
-  render()
+  if (records.value.length > 0) {
+    await nextTick()
+    render()
+  }
 }, { immediate: true })
 
 const render = () => {
@@ -51,12 +59,14 @@ const render = () => {
     autoFit: true
   })
 
+  console.log(records.value)
+
   chart.coordinate({ type: 'radial', endAngle: Math.PI })
 
   chart
     .interval()
     .data({
-      value: record.value,
+      value: records.value,
       transform: [{ type: 'sortBy', fields: [['count', true]] }]
     })
     .encode('x', 'keyword')
